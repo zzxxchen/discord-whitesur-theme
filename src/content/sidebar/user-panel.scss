@@ -1,0 +1,165 @@
+@use "controls";
+@use "typography";
+
+.audioButtonParent__5e764 {
+	@include controls.split-button(
+		$lhs: ".audioButtonWithMenu__5e764",
+		$rhs: ".buttonChevron__5e764"
+	);
+
+	&.hasColorGlow__5e764 {
+		color: var(--destructive-color);
+
+		// aria-label stays the same, bug ?
+		&:nth-child(1) .audioButtonWithMenu__5e764 {
+			--icon: icon("mic-none");
+		}
+
+		&:nth-child(2) .audioButtonWithMenu__5e764 {
+			--icon: icon("headphones-muted");
+		}
+	}
+
+	.button__67645 {
+		color: inherit;
+	}
+
+	.buttonChevron__5e764 {
+		margin: 0;
+	}
+}
+
+// vc
+.container_e131a9 {
+	border-bottom: 1px solid var(--secondary_sidebar_border_color);
+	gap: var(--spacing);
+	padding: var(--spacing);
+	margin: 0;
+
+	// TODO: remove when it gets aria-labels again (fucking never)
+	.button_e131a9 {
+		$-icons: (
+			1: "camera-disabled",
+			3: "record-screen",
+			5: "emoji-activities",
+			7: "bullhorn",
+		);
+
+		@each $k, $v in $-icons {
+			&:nth-child(#{$k}) {
+				--icon: icon(#{$v});
+			}
+		}
+	}
+}
+
+.panels__5e434 {
+	background: var(--background-secondary-alt);
+	border: none;
+	border-top: 1px solid var(--secondary_sidebar_border_color);
+	border-radius: 0;
+	// --elevation-low
+	box-shadow: 0 -2px 4px
+		color-mix(in srgb, var(--headerbar_shade_color) 50%, transparent);
+
+	bottom: 0;
+	left: var(--custom-guild-list-width);
+	width: calc(
+		var(--custom-guild-sidebar-width) - var(--custom-guild-list-width) - 1px
+	);
+	--icon: icon("bullhorn");
+
+	.custom-theme-background & {
+		background: none;
+	}
+
+	.accountPopoutButtonWrapper__37e49 {
+		@include controls.button-basic-raised;
+
+		background-color: transparent;
+		border-radius: 0;
+		padding: var(--spacing);
+		margin: 0;
+
+		min-width: 0;
+
+		.nameTag__37e49 {
+			@container (max-width: 260px) {
+				display: none;
+			}
+		}
+	}
+
+	// also vc
+	.activityPanel__37e49 {
+		background-color: inherit;
+		border-bottom: var(--secondary_sidebar_border_color);
+		border-radius: 0;
+	}
+
+	:where(.button__201d5) {
+		@include controls.icon-button;
+
+		color: inherit;
+	}
+
+	.buttons__37e49 {
+		gap: var(--spacing);
+	}
+
+	.container__37e49 {
+		padding: 0;
+		padding-right: var(--spacing);
+		margin: 0;
+
+		height: unset;
+	}
+}
+
+.panelTitleContainer__37e49 {
+	margin: 0;
+
+	& > div {
+		@extend %title-3;
+
+		color: var(--window_fg_color);
+	}
+}
+
+.rtcConnectionStatus__06d62 {
+	height: unset;
+
+	&.rtcConnectionQualityFine__06d62 {
+		--icon: icon("radiowaves-1");
+		--text-color: var(--success-color);
+	}
+
+	&.rtcConnectionQualityAverage__06d62 {
+		--icon: icon("radiowaves-2");
+		--text-color: var(--warning-color);
+	}
+
+	&.rtcConnectionQualityBad__06d62 {
+		--icon: icon("radiowaves-3");
+		--text-color: var(--destructive-color);
+	}
+
+	.clickablePing__06d62 {
+		@include controls.icon-button;
+
+		color: var(--text-color);
+		margin-inline-end: var(--spacing);
+	}
+}
+
+.rtcConnectionStatusLabel__06d62 {
+	margin: 0;
+
+	height: unset;
+}
+
+// There are only 2 buttons and 1 of them has a constant aria-label, the other
+// doesn't
+.voiceButtonsContainer_e131a9 {
+	--icon: icon("sound-wave");
+}

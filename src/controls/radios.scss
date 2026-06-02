@@ -1,0 +1,27 @@
+@use "controls";
+
+// Settings
+@include controls.radio(
+	".group__64e61",
+	".radioGroupOption__64e61",
+	".radioIndicator__64e61",
+	":where(.radioGroupOption__64e61, .standaloneRadioIndicator__64e61)[data-selected='true']"
+);
+
+.group__64e61 {
+	padding: 0;
+}
+
+.radioGroupOption__64e61 {
+	& > .stack_dbd263 {
+		justify-content: center;
+	}
+}
+
+// Poll
+@include controls.radio(
+	".answersContainer__4c520",
+	".answer__4c520",
+	".answerSelectionIcon__4c520",
+	".answer__4c520[aria-checked='true']"
+);

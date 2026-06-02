@@ -1,0 +1,180 @@
+@use "controls";
+@use "typography";
+
+[aria-label="Open sticker picker"] {
+	display: none;
+}
+
+.channelAttachmentArea_b77158 {
+	@include controls.cards-container;
+
+	gap: 0;
+	padding: 0;
+	// shadow - 6px radius + 2px offset
+	margin: 8px 0;
+
+	.attachmentContainer__299eb {
+		border-radius: calc(var(--base-unit) * 2 + 2px);
+	}
+
+	.filename__41ea0 {
+		font: inherit;
+		color: inherit;
+	}
+
+	.upload_aa605f {
+		@include controls.card-in-container(
+			$first-selector: ":first-child",
+			$last-selector: ":last-child"
+		);
+
+		border-bottom: none;
+
+		&:not(:last-child) {
+			border-right: 1px solid var(--card_shade_color);
+		}
+	}
+
+	// TODO: I've seen this somewhere
+	.wrapper_f7ecac {
+		@include controls.osd-like-button-group;
+
+		box-shadow: none;
+
+		height: unset;
+
+		.button_f7ecac {
+			@include controls.osd-like-button;
+
+			&.dangerous_f7ecac {
+				color: var(--destructive-color);
+			}
+		}
+	}
+}
+
+// Message form-specific channelTextArea stuff
+.channelTextArea__74017 {
+	// prettier-ignore
+	--attach-button-left-offset: calc(
+		var(--custom-message-avatar-size)
+		+ var(--custom-message-margin-horizontal)
+		- var(--icon-button-size)
+		- var(--spacing) * 2.5
+	);
+
+	.attachButton__0923f {
+		--icon: icon("plus-circle-outline");
+
+		// align with cozy mode avatars, à la discord
+		margin-left: var(--attach-button-left-offset);
+		margin-right: var(--spacing);
+	}
+
+	.attachWrapper__0923f {
+		padding: 0;
+		margin-right: calc(var(--spacing) * 1.5);
+	}
+
+	.button_e6e74f {
+		@include controls.icon-button($name: "grid-large");
+
+		margin-left: var(--spacing);
+	}
+
+	.buttonContainer_e6e74f {
+		background: none;
+	}
+
+	.button__24af7 {
+		@include controls.icon-button;
+	}
+
+	.button_aa63ab {
+		@include controls.button-accent;
+
+		border-radius: 50%;
+		margin-left: var(--spacing);
+	}
+
+	// Not included in channel-text-area.scss since I disable scrolling only for
+	// the attachments card.
+	.scrollableContainer__74017 {
+		overflow: visible;
+	}
+
+	.separator_aa63ab {
+		display: none;
+	}
+}
+
+.form_f75fb0 {
+	padding-inline: var(--custom-message-margin-horizontal);
+	margin: 0;
+
+	&::before,
+	&::after {
+		display: none;
+	}
+}
+
+.stackedBars__74017 {
+	background-color: transparent;
+	border: none;
+
+	.actions__841c8 {
+		gap: var(--spacing);
+		margin: 0;
+	}
+
+	.clipContainer__841c8 {
+		padding: 0;
+		margin: 0;
+	}
+
+	.closeButton_e876a8 {
+		@include controls.icon-button("window-close");
+	}
+
+	.mentionButton__841c8 {
+		@include controls.button;
+
+		box-sizing: border-box;
+
+		svg {
+			display: initial;
+		}
+	}
+
+	.replyBar__841c8 {
+		background-color: inherit;
+		gap: var(--spacing);
+		margin: var(--spacing);
+		margin-right: 0;
+	}
+
+	.replyLabel__841c8 {
+		@extend %text-normal;
+		@extend %link;
+
+		// 8px = text field padding
+		margin-left: calc(
+			var(--attach-button-left-offset) + var(--icon-button-size) + 8px
+		);
+	}
+
+	.threadSuggestionBar__841c8,
+	.separator__841c8 {
+		display: none;
+	}
+}
+
+.typing_b88801 {
+	padding-left: var(--custom-message-margin-horizontal);
+
+	// good enough
+	.text_b88801 {
+		position: relative;
+		left: -1px;
+	}
+}

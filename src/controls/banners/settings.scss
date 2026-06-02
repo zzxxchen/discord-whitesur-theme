@@ -1,0 +1,34 @@
+@use "controls";
+@use "util";
+
+.actions__9a9f9 {
+	gap: var(--spacing);
+}
+
+.container__9a9f9 {
+	@include controls.banner;
+	@include util.inactive-dim;
+
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+// TODO: remove when server settings uses new modal
+.noticeRegion__23e6b,
+.notice__6131a {
+	padding: 0;
+
+	position: relative;
+	width: 100%;
+	max-width: unset;
+
+	// Remove animation
+	opacity: 1;
+	transform: translateY(0%) translateZ(0px);
+}
+
+.shrinkingContainer__9a9f9 {
+	text-align: center;
+	width: 100%;
+}

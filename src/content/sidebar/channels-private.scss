@@ -1,0 +1,38 @@
+@use "controls";
+@use "typography";
+@use "util";
+
+[href="/channels/@me"] .avatar__20a53 {
+	@include util.icon("org.gnome.Settings-users");
+
+	padding: 8px;
+
+	svg {
+		display: none;
+	}
+}
+
+// "Friends" entry
+.channel__972a0:not(.dm__972a0) .link__972a0 {
+	padding-block: var(--space-xxs);
+}
+
+.name__20a53 {
+	@extend %title-3;
+}
+
+.interactive__972a0 {
+	@include controls.button-basic-raised;
+
+	transition: none;
+	background-color: transparent;
+	color: var(--window_fg_color);
+
+	&.interactiveSelected__972a0 {
+		@include controls.button-selected;
+	}
+}
+
+.scroller__99e7c {
+	margin-bottom: var(--custom-app-panels-height);
+}

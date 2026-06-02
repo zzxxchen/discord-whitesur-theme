@@ -1,0 +1,69 @@
+@use "controls";
+@use "dialog";
+@use "typography";
+
+.header_e8b59c {
+	@include dialog.header;
+}
+
+.messagesPopout_e8b59c {
+	padding: 0;
+
+	[role="list"] {
+		@include controls.cards-container;
+
+		margin: 22px 28px;
+
+		overflow: hidden;
+
+		& > div {
+			border: none;
+			padding: 0;
+			margin: 0;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid var(--card_shade_color);
+				border-radius: 0;
+			}
+		}
+	}
+
+	.messageContainer__95796 {
+		background-color: transparent;
+		border: none;
+		padding: 8px 0;
+		margin: 0;
+	}
+
+	.jumpButton_ed0c8c {
+		@include controls.button;
+
+		box-shadow: none;
+
+		top: 8px;
+		right: 8px;
+		height: unset;
+
+		& > div {
+			color: inherit;
+			font-size: inherit;
+		}
+	}
+}
+
+.messagesPopoutWrap_e8b59c {
+	@include dialog.container;
+}
+
+.titleContainer_e8b59c {
+	justify-content: center;
+	height: var(--headerbar-height);
+
+	[data-text-variant="text-lg/semibold"] {
+		@extend %title-3;
+	}
+
+	svg {
+		display: none;
+	}
+}

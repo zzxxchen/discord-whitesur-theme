@@ -1,0 +1,90 @@
+@use "controls";
+
+$destructive_button_color: color-mix(in srgb, currentColor 15%, transparent);
+$destructive_button_hover_color: color-mix(
+	in srgb,
+	currentColor 20%,
+	transparent
+);
+$destructive_button_active_color: color-mix(
+	in srgb,
+	currentColor 35%,
+	transparent
+);
+
+@mixin -destructive {
+	background-color: $destructive_button_color;
+	color: var(--destructive-color);
+
+	&:hover {
+		background-color: $destructive_button_hover_color;
+	}
+
+	&:active {
+		background-color: $destructive_button_active_color;
+	}
+}
+
+.button__201d5 {
+	@include controls.button;
+
+	&:disabled {
+		opacity: var(--dim-level-opacity);
+	}
+
+	&:where(.colorBrand__201d5) {
+		@include controls.button-accent;
+	}
+
+	&:where(.colorRed__201d5) {
+		@include -destructive;
+	}
+
+	&:where(.colorGreen__201d5) {
+		color: var(--success-color);
+	}
+
+	&:where(.lookBlank__201d5) {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	& > div {
+		--button--underline-color: transparent;
+	}
+}
+
+// new
+.button_a22cb0 {
+	@include controls.button;
+
+	max-height: unset;
+
+	&:where(.primary_a22cb0) {
+		@include controls.button-accent;
+	}
+
+	&:where(.critical-primary_a22cb0),
+	&:where(.critical-secondary_a22cb0) {
+		@include -destructive;
+	}
+
+	&:where(.critical-primary_a22cb0, .critical-secondary_a22cb0) {
+		@include -destructive;
+	}
+
+	// TODO: lag?
+	&:where(:not(.hasText_a22cb0):has(.icon_a22cb0)),
+	&:where(.icon-only_a22cb0) {
+		@include controls.icon-button;
+	}
+}
+
+.buttonChildrenWrapper_a22cb0 {
+	all: unset;
+
+	// undo %caption
+	[data-text-variant] {
+		all: inherit;
+	}
+}

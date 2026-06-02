@@ -1,0 +1,13 @@
+@use "controls";
+
+.switchIndicator_a28278 {
+	@include controls.switch(
+		$checked:
+			":where([style*='rgb(88, 101, 242);'], [style*='rgb(68, 82, 187);'])",
+		$disabled: "[style*='opacity: 0.5;']"
+	);
+}
+
+.thumb_a28278 {
+	display: none;
+}

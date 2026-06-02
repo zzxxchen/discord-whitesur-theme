@@ -1,0 +1,52 @@
+@use "controls";
+@use "typography";
+
+.privateChannels_e6b769 {
+	&::before {
+		content: attr(aria-label);
+
+		position: absolute;
+		inset-inline: 0;
+		height: var(--headerbar-height);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		@extend %title-3;
+		color: var(--headerbar_fg_color);
+	}
+
+	[role="listitem"] {
+		border-radius: var(--button_radius);
+		padding: 0;
+	}
+}
+
+.privateChannelsHeaderContainer__99e7c {
+	display: none;
+}
+
+.searchBar_e6b769 {
+	border: none;
+	box-shadow: var(--elevation-low);
+	padding: var(--spacing);
+
+	height: var(--headerbar-height);
+
+	app-region: drag;
+
+	& > button {
+		@include controls.icon-button-with-tooltip(
+			$name: "loupe-large",
+			$direction: bottom,
+			$overflow-workaround-direction: "left"
+		);
+
+		color: var(--headerbar_fg_color);
+
+		// undo fullWidth for mana button
+		flex: unset;
+
+		app-region: no-drag;
+	}
+}

@@ -1,0 +1,49 @@
+@use "controls";
+@use "typography";
+@use "util";
+
+[role="tab"] {
+	@include controls.button;
+
+	background-color: transparent;
+	padding-block: 10px;
+	margin: 0;
+
+	box-sizing: border-box;
+	display: block;
+
+	&[aria-selected="true"] {
+		background-color: color-mix(in srgb, currentColor 10%, transparent);
+
+		&:hover {
+			background-color: color-mix(in srgb, currentColor 13%, transparent);
+		}
+
+		&:active {
+			background-color: color-mix(in srgb, currentColor 19%, transparent);
+		}
+	}
+
+	&::after {
+		display: none;
+	}
+}
+
+[role="tablist"][aria-orientation="horizontal"] {
+	gap: 5px;
+	border: none;
+}
+
+// .navigation-sidebar > row
+[role="tablist"][aria-orientation="vertical"] {
+	padding: var(--menu_margin) 0;
+
+	[role="tab"] {
+		@extend %text-normal;
+
+		line-height: 44px;
+		min-height: 36px;
+		padding: 0 14px;
+		margin: 0 var(--menu_margin) 2px;
+	}
+}

@@ -1,0 +1,54 @@
+@use "controls";
+@use "util";
+
+// Emoji
+.popoutContainer__0f481 {
+	--custom-message-helpers-popout-padding-width: 0px;
+
+	@include controls.tooltip;
+
+	// "Invite-only server"
+	[data-text-variant="text-xs/normal"],
+	// "This emoji is from"
+	.defaultColor__4bd52,
+	.guildTitle__0f481 {
+		color: inherit;
+	}
+
+	.emojiSection__0f481 {
+		& > div {
+			align-items: center;
+		}
+	}
+
+	.guildSection__0f481 {
+		background-color: transparent;
+	}
+
+	.primaryEmoji__0f481 {
+		margin: 0;
+	}
+}
+
+.reactionTooltip_b49891 {
+	@include controls.tooltip;
+
+	.reactionTooltipText_b49891 {
+		color: inherit;
+		font: inherit;
+	}
+}
+
+.tooltip__4e35b {
+	@include controls.tooltip;
+
+	* {
+		@extend %text-normal;
+
+		color: inherit;
+	}
+
+	.caret__5bc6a {
+		display: none;
+	}
+}

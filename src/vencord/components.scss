@@ -1,0 +1,134 @@
+@use "controls";
+@use "typography";
+@use "util";
+
+:where(.vc-btn-base) {
+	@include controls.button;
+
+	&:disabled {
+		opacity: var(--dim-level-opacity);
+	}
+
+	&.vc-btn-primary {
+		@include controls.button-accent;
+	}
+}
+
+.vc-card-base {
+	@include controls.card;
+
+	border: none;
+
+	&.vc-card-warning {
+		--card_bg_color: color-mix(
+			in srgb,
+			var(--warning-bg-color) 10%,
+			transparent
+		);
+		--card_fg_color: var(--warning-color);
+		--card_shade_color: color-mix(
+			in srgb,
+			var(--warning-bg-color) 36%,
+			transparent
+		);
+	}
+}
+
+.vc-divider {
+	display: none;
+}
+
+.vc-form-switch {
+	margin-block: auto;
+
+	&.vc-form-switch-disabled {
+		opacity: 1;
+	}
+
+	.vc-text-md {
+		@extend %title-3;
+
+		margin-block: 4px;
+	}
+
+	.vc-text-sm {
+		@extend %caption;
+	}
+}
+
+.vc-form-switch-text {
+	gap: var(--spacing);
+
+	justify-content: start;
+}
+
+.vc-form-switch-wrapper {
+	@include controls.card;
+
+	border-bottom: 1px solid var(--card_shade_color);
+	border-radius: 0;
+	margin: 0;
+
+	display: flex;
+
+	&:where(:nth-child(-n + 1 of &)) {
+		border-radius: var(--card_radius) var(--card_radius) 0 0;
+	}
+
+	&:where(:nth-last-child(-n + 1 of &)) {
+		border-radius: 0 0 var(--card_radius) var(--card_radius);
+		border: none;
+	}
+
+	&:only-child {
+		border-radius: var(--card_radius);
+	}
+}
+
+.vc-h4,
+.vc-h5 {
+	@extend %title-3;
+
+	// h4
+	letter-spacing: 0;
+}
+
+.vc-icon {
+	@include util.icon;
+
+	$-icons: (
+		cog-wheel: "settings",
+		folder-icon: "folder",
+		info-icon: "info-outline",
+		log-icon: "info-outline",
+		paintbrush-icon: "edit",
+		restart-icon: "update",
+	);
+
+	@each $k, $v in $-icons {
+		&.vc-#{$k} {
+			--icon: icon(#{$v});
+		}
+	}
+
+	* {
+		display: none;
+	}
+}
+
+.vc-switch-container {
+	@include controls.switch(
+		$checked: ".vc-switch-checked",
+		$disabled: ".vc-switch-disabled"
+	);
+}
+
+.vc-switch-slider {
+	display: none;
+}
+
+.vc-text-sm,
+.vc-text-xs {
+	color: var(--window_fg_muted);
+	font-size: var(--document-font-size);
+}

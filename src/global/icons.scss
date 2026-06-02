@@ -1,0 +1,275 @@
+// I may create a script in the future for this exact purpose when the theme is
+// fully done, but for now you may localize this file into your own language by
+// changing the left hand side of the -gen-icons mixin, but note:
+//
+// 1. There will be *no support* for anything but English (US) because of
+//    potential performance issues (I did not test this, but there's a chance
+//    Discord doesn't like *that* many attribute selectors). You may instead
+//    create a gist with the built "dist/global/icons.css" file and import it.
+//
+// 2. I forgot what I wanted to type here.
+
+@mixin -gen-icons($attr, $map) {
+	@each $id, $icon in $map {
+		[#{$attr}="#{$id}"] {
+			--icon: icon(#{$icon});
+		}
+	}
+}
+
+// Dynamic attributes
+[aria-label^="Remove answer"] {
+	--icon: icon("window-close");
+}
+
+// Common
+@include -gen-icons(
+	"aria-label",
+	(
+		"Close": "window-close",
+		"More": "menu",
+	)
+);
+
+// Modals
+@include -gen-icons(
+	"aria-label",
+	(
+		// Image carousel modal
+		"Forward": "mail-forward",
+		"Open in Browser": "external-link",
+		"Zoom In": "loupe-plus-large",
+		"Zoom Out": "loupe-minus-large",
+
+		// User profile popout
+		"Add Friend": "plus",
+		"Add Role": "plus",
+		"Friend": "person",
+		"Open in Mod View": "key5"
+	)
+);
+
+// Vencord
+@include -gen-icons(
+	"aria-label",
+	(
+		// Message form
+		"Disable Game Activity": "xbox-controller",
+		"Disable Silent Message": "bell-outline",
+		"Disable Silent Typing": "keyboard3",
+		"Enable Game Activity": "xbox-controller-none",
+		"Enable Silent Message": "bell-outline-none",
+		"Enable Silent Typing": "keyboard3-none",
+		"Encrypt Message": "padlock2",
+		"Open Translate Modal": "translate",
+
+		// Message actions
+		"Translate": "translate",
+
+		// User profile popout
+		"View Reviews": "notepad"
+	)
+);
+
+// Chat toolbar
+@include -gen-icons(
+	"aria-label",
+	(
+		"Add Friends to DM": "contact-new",
+		"Add Friends to Group DM": "contact-new",
+		// TODO(experiment): remove later ? nitro only
+		"Bookmarks": "user-bookmarks",
+		"DevTools": "build-alt",
+		// VC (not a mistake, actually D*scord; "Show Chat" is the same)
+		"Hide chat": "chat",
+		"Hide Chat": "chat",
+		"Hide Member List": "org.gnome.Settings-users",
+		"Hide User Profile": "user-info",
+		// TODO(experiment): remove in the future in favor of notifications
+		"Inbox": "mail-unread",
+		// Group chat
+		"Join Voice Call": "phone-right-facing",
+		"New Group DM": "contact-new",
+		"Notification Settings": "bell-outline",
+		"Notifications": "bell-outline",
+		"Pinned Messages": "pin",
+		"Show chat": "chat",
+		"Show Chat": "chat",
+		"Show Member List": "org.gnome.Settings-users",
+		"Show User Profile": "user-info",
+		"Show User Profile (Unavailable)": "user-info",
+		"Start Video Call": "camera-photo",
+		"Start Voice Call": "phone-right-facing",
+		"Threads": "chat-bubbles-empty-inverted",
+	)
+);
+
+// Channels list
+@include -gen-icons(
+	"aria-label",
+	(
+		"Announcements icon": "bullhorn",
+		"Forum icon": "chat-bubbles-empty-inverted",
+		"Rules icon": "notepad",
+		"Voice icon": "phone-right-facing",
+	)
+);
+
+// User panel
+@include -gen-icons(
+	"aria-label",
+	(
+		"Camera Unavailable": "camera-disabled",
+		"Deafen": "headphones",
+		"Disconnect": "window-close",
+		"Leave Activity": "log-out",
+		"Minimize Activity": "window-minimize",
+		"Open Soundboard": "bullhorn",
+		"Share Your Screen": "record-screen",
+		"Start An Activity": "emoji-activities",
+		"Stop Streaming": "stop",
+		"Turn Off Camera": "camera-photo",
+		"Turn On Camera": "camera-photo",
+		"User Settings": "settings",
+		"Video": "camera-photo",
+	)
+);
+
+// Home page
+@include -gen-icons(
+	"aria-label",
+	(
+		"Accept": "check-plain",
+		"Cancel": "window-close",
+		"Ignore": "window-close",
+		"Message": "chat-bubbles-empty-inverted",
+	)
+);
+
+// Message actions
+@include -gen-icons(
+	"aria-label",
+	(
+		"Add Reaction": "reaction-add2",
+		"Copy Link": "edit-copy",
+		"Create Thread": "chat",
+		"Delete": "user-trash",
+		"Edit": "edit",
+		"Forward": "arrow-turn-right-horizontal2",
+		"Mark Unread": "arrow-circular-top-right",
+		"Pin Message": "pin",
+		"Reply": "arrow-hook-left-horizontal2",
+	)
+);
+
+// Message form
+@include -gen-icons(
+	"aria-label",
+	(
+		"Open GIF picker": "image-round",
+		"Add Emoji": "emoji-people",
+		"Send Message": "paper-plane",
+	)
+);
+
+// Attachment actions
+@include -gen-icons(
+	"aria-label",
+	(
+		"Modify Attachment": "edit",
+		"Remove Attachment": "user-trash",
+		"Spoiler Attachment": "eye-not-looking",
+	)
+);
+
+// Group chat
+@include -gen-icons(
+	"aria-label",
+	(
+		"Dismiss": "log-out",
+		"Join Call": "phone-right-facing",
+		"Join Video Call": "camera-photo",
+	)
+);
+
+// VC
+@include -gen-icons(
+	"aria-label",
+	(
+		"Exit Full Screen": "view-fullscreen",
+		"Full Screen": "view-fullscreen",
+		"More Options": "menu",
+		"Mute": "microphone",
+		"Pop Out": "pip-in",
+		"Stop Watching": "window-close",
+		"Stream Settings": "menu",
+		"Unmute": "mic-none",
+	)
+);
+
+// Settings dialog
+@include -gen-icons(
+	"data-list-item-id",
+	(
+		// User settings
+		"settings-sidebar___accessibility_sidebar_item": "body",
+		"settings-sidebar___account_sidebar_item": "person",
+		"settings-sidebar___activity_privacy_sidebar_item": "screen-privacy4",
+		"settings-sidebar___authorized_apps_sidebar_item": "grid-large",
+		"settings-sidebar___connections_sidebar_item": "phonelink",
+		"settings-sidebar___content_and_social_sidebar_item": "shield-full",
+		"settings-sidebar___data_and_privacy_sidebar_item": "screen-privacy4",
+		"settings-sidebar___developer_sidebar_item": "build-alt",
+		"settings-sidebar___developer_options_sidebar_item": "build",
+		"settings-sidebar___appearance_sidebar_item": "brush-monitor",
+		"settings-sidebar___experiments_sidebar_item": "test",
+		"settings-sidebar___family_center_sidebar_item": "eye-open-negative-filled",
+		"settings-sidebar___keybinds_sidebar_item": "keyboard3",
+		"settings-sidebar___language_and_time_sidebar_item": "translate",
+		"settings-sidebar___logout_sidebar_item": "system-log-out",
+		"settings-sidebar___notifications_sidebar_item": "bell-outline",
+		"settings-sidebar___sessions_sidebar_item": "smartphone",
+		"settings-sidebar___vencord_main": "settings",
+		"settings-sidebar___vencord_cloud": "cloud-filled",
+		"settings-sidebar___vencord_deprecated_custom_Vesktop": "settings",
+		"settings-sidebar___vencord_plugins": "puzzle-piece",
+		"settings-sidebar___vencord_themes": "larger-brush",
+		"settings-sidebar___vencord_updater": "update",
+		"settings-sidebar___vencord_backup_restore": "history-undo",
+		"settings-sidebar___voice_and_video_sidebar_item": "microphone"
+	)
+);
+
+// Old settings dialog
+@include -gen-icons(
+	"data-tab-id",
+	(
+		// Server settings
+		"ACCESS": "padlock2",
+		"ANALYTICS": "info-outline",
+		"APP_DIRECTORY": "grid-large",
+		"AUDIT_LOG": "notepad",
+		"BANS": "circle-crossed",
+		"BOOST_PERKS": "credit-card",
+		"COMMUNITY": "org.gnome.Settings-users",
+		"EMOJI": "emoji-people",
+		"ENGAGEMENT": "info-outline",
+		"GUILD_AUTOMOD": "shield-full",
+		"GUILD_PREMIUM": "credit-card",
+		"GUILD_TEMPLATES": "folder-templates",
+		"INTEGRATIONS": "grid-large",
+		"INVITES": "paper-plane",
+		"MEMBERS": "org.gnome.Settings-users",
+		"MODERATION": "shield-full",
+		"PROFILE": "info-outline",
+		"ROLES": "view-list",
+		"STICKERS": "image-round",
+		"SOUNDBOARD": "bullhorn",
+
+		// Channel settings
+		"DELETE": "window-close",
+		"INSTANT_INVITES": "paper-plane",
+		"OVERVIEW": "info-outline",
+		"PERMISSIONS": "org.gnome.Settings-users"
+	)
+);

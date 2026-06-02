@@ -1,0 +1,67 @@
+@use "typography";
+
+// Reference: _labels.scss
+
+html {
+	font-size: var(--document-font-size);
+}
+
+::selection {
+	background-color: color-mix(in srgb, var(--view_fg_color) 10%, transparent);
+
+	.app-focused & {
+		background-color: color-mix(
+			in srgb,
+			var(--accent-bg-color) 30%,
+			transparent
+		);
+	}
+}
+
+[data-text-variant] {
+	line-height: 1.2;
+	text-transform: none;
+}
+
+.eyebrow__2b1f5:not(.numberBadge__2b1f5),
+.h1_b717a1,
+.h2_b717a1,
+.h3_b717a1,
+.h4_b717a1,
+.h5_b717a1 {
+	@extend %title-3;
+
+	letter-spacing: 0;
+	margin-bottom: 16px;
+}
+
+[data-text-variant^="heading-lg"],
+[data-text-variant^="heading-x"] {
+	@extend %title-1;
+}
+
+[data-text-variant^="heading-md"] {
+	@extend %title-2;
+}
+
+[data-text-variant^="heading-deprecated-12"],
+[data-text-variant^="heading-sm"] {
+	@extend %title-4;
+}
+
+.description_ddd181,
+[data-text-variant^="text-sm"],
+[data-text-variant^="text-xs"] {
+	@extend %caption;
+}
+
+[data-text-variant^="text-md"] {
+	@extend %title-3;
+	font-weight: 400;
+}
+
+.anchor_edefb8 {
+	@extend %link;
+
+	opacity: 1;
+}

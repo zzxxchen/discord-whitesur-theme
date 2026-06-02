@@ -1,0 +1,227 @@
+@use "controls";
+@use "typography";
+
+%-center-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+%-tab-header {
+	color: var(--headerbar_fg_color);
+
+	position: fixed;
+	top: calc(var(--p) + 1px);
+	// prettier-ignore
+	left: calc(
+		var(--p)
+		+ var(--sidebar-width)
+		+ var(--scrollbar-width)
+		+ var(--weird-offset)
+		+ 1px
+	);
+	// prettier-ignore
+	width: calc(
+		100%
+		- var(--p) * 2 - var(--sidebar-width)
+		- var(--titlebar-button-size) - var(--titlebar-button-spacing) * 2
+		- var(--scrollbar-width)
+	);
+	height: var(--headerbar-height);
+	z-index: 999;
+
+	app-region: drag;
+
+	&::before {
+		content: "";
+
+		position: absolute;
+		inset: 0;
+		// prettier-ignore
+		width: calc(
+			100%
+			+ var(--titlebar-button-size) + var(--titlebar-button-spacing) * 2
+			- var(--weird-offset) - 2px
+		);
+		z-index: -1;
+
+		background-color: var(--window_bg_color);
+		border-top-right-radius: var(--window_radius);
+		box-shadow: var(--elevation-low);
+	}
+}
+
+.closeButton_c2b141 {
+	@include controls.titlebar-button;
+
+	opacity: 1;
+	color: var(--headerbar_fg_color);
+
+	flex: 0 0 var(--titlebar-button-size);
+}
+
+.contentColumn__23e6b {
+	& > .defaultColor__4bd52:first-child,
+	.settingsPage_f131e9 > h3 {
+		@extend %-center-text;
+		@extend %-tab-header;
+		@extend %title-3;
+	}
+
+	& > div > .sectionTitle__7bffb {
+		@extend %-tab-header;
+
+		& > * {
+			@extend %-center-text;
+			@extend %title-3;
+
+			margin: 0;
+		}
+	}
+}
+
+// Server settings
+// #2 is for "Invites" tab
+.standardSidebarView__23e6b :where(.scrollerBase_d125d2, .scrollerBase__99f8c) {
+	// Vencord
+	& > .contentColumn__23e6b > section > h2:first-child,
+	.vcd-settings-title,
+	// Most tabs
+	div:not([class]) > h2[data-text-variant="heading-lg/semibold"],
+	// Boost Perks
+	#boost_perks-tab > main > h2,
+	// Emoji/Bans
+	:is(.emojiSettings_e7d73e, .container__4b8d8) .sectionTitle__7bffb > h2,
+	// Members
+	.header_fa2640 > h2,
+	// Roles
+	[aria-hidden="true"][style="height: 60px;"] + div > h2,
+	// Invites
+	.header__1de14,
+	// Access
+	#access-tab > div > h2,
+	// Integrations
+	.breadcrumbs_befe67 > h2,
+	// Server Boost Status
+	#guild_premium-tab > h2,
+	// Server Templates
+	#guild_templates-tab > div > h2,
+	// Audit logs
+	.formTitle__5906b {
+		@extend %-center-text;
+		@extend %-tab-header;
+		@extend %title-3;
+	}
+
+	// "Invites" tab
+	.header__1de14 {
+		padding: 0;
+	}
+}
+
+.keybind_c2b141 {
+	display: none;
+}
+
+.layer__960e4 {
+	opacity: 1;
+	background-color: transparent;
+}
+
+.layers__960e4 {
+	--p: calc((100% - var(--settings-dialog-size)) / 2);
+	--weird-offset: 1px;
+
+	.custom-theme-background & {
+		--weird-offset: 2px;
+	}
+
+	.systemBar_c38106.show_c38106 + div &::before {
+		content: "";
+
+		position: fixed;
+		inset: 0;
+
+		background-color: var(--backdrop);
+		border-radius: var(--window_radius);
+		z-index: 101;
+	}
+}
+
+// Server settings "Roles" tab sidebar
+// No idea how this got broken, 0 behavior change, GENIUS layout, D*scord
+.page__91dc3 {
+	position: absolute;
+
+	// Single role view headerbar
+	.titleContainer_e29cd7 {
+		@extend %-tab-header;
+
+		box-shadow: none;
+		gap: var(--spacing);
+		padding: var(--spacing);
+		margin: 0;
+
+		justify-content: start;
+
+		.addRole_e29cd7 {
+			@include controls.icon-button("plus");
+
+			app-region: no-drag;
+		}
+
+		.title_e29cd7 {
+			@include controls.icon-button-with-tooltip(
+				$name: "left",
+				$direction: "top",
+				$selector: "&:hover > .titleText_e29cd7"
+			);
+
+			app-region: no-drag;
+		}
+	}
+}
+
+.sidebarRegion__23e6b {
+	[role="tablist"][aria-orientation="vertical"]::before {
+		content: attr(aria-label);
+
+		position: fixed;
+		top: calc(var(--p) + 1px);
+		left: calc(var(--p) + var(--weird-offset));
+		width: calc(var(--sidebar-width) + var(--scrollbar-width));
+		height: var(--headerbar-height);
+		@extend %-center-text;
+
+		background-color: var(--sidebar_bg_color);
+		@extend %title-3;
+		color: var(--headerbar_fg_color);
+		border-right: 1px solid var(--sidebar_border_color);
+		border-top-left-radius: var(--window_radius);
+		box-shadow: var(--elevation-low);
+
+		app-region: drag;
+	}
+}
+
+.standardSidebarView__23e6b {
+	box-shadow: var(--elevation-high);
+	border: 1px solid var(--window_outline_color);
+	border-radius: var(--window_radius);
+	padding-top: var(--headerbar-height);
+
+	overflow: hidden;
+	position: fixed;
+	inset: var(--p);
+}
+
+.tools__23e6b {
+	position: fixed;
+	top: calc(var(--p) + 16px);
+	right: calc(var(--p) + 16px);
+}
+
+.toolsContainer__23e6b {
+	position: absolute;
+	z-index: 999;
+}
