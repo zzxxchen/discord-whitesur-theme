@@ -12,26 +12,43 @@
 	border: none;
 	box-shadow: var(--elevation-low);
 	padding: var(--titlebar-button-spacing);
+	padding-inline-start: var(--spacing);
 
 	height: var(--headerbar-height);
 	z-index: 1;
 
+	.breadcrumbsNav__6989f {
+		margin: auto;
+
+		[aria-hidden] {
+			color: var(--window_fg_muted);
+		}
+	}
+
 	.contentHeaderLeft_e9e3ed {
 		flex-grow: 1;
-		justify-content: center;
+
+		& > button {
+			--icon: icon("left");
+
+			@include controls.icon-button;
+		}
 	}
 
 	[data-text-variant] {
 		@extend %title-3;
+
+		// For whatever reason this makes it centered
+		line-height: 1;
 	}
 
-	button {
+	& > button {
 		@include controls.titlebar-button;
 	}
 }
 
 .modal_e44912 {
-	.divider__1de9c {
+	.divider__44f7f {
 		display: none;
 	}
 
@@ -72,7 +89,7 @@
 			@include controls.icon-button-with-tooltip(
 				$name: "person",
 				$direction: "bottom",
-				$selector: "&:hover .textContainer__99464"
+				$selector: "&:hover .textContainer__3cfcf"
 			);
 
 			margin: 0;
@@ -84,18 +101,16 @@
 				@include controls.button-selected;
 			}
 
-			&:not(:hover) .textContainer__99464 {
+			&:not(:hover) .textContainer__3cfcf {
 				display: none;
 			}
 		}
 
-		.profileCustomizationTab__99464 {
-			gap: var(--spacing);
-
+		.profileCustomizationTab__3cfcf {
 			display: flex;
 			max-width: unset;
 
-			.textContainer__99464 {
+			.textContainer__3cfcf {
 				left: var(--spacing);
 			}
 

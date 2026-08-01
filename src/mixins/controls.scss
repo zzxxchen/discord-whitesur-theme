@@ -10,7 +10,7 @@ $toast_fg_color: white;
 
 @mixin -bold-font {
 	font-size: var(--document-font-size);
-	font-weight: 500;
+	font-weight: bold;
 }
 
 @mixin banner {

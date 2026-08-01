@@ -61,8 +61,8 @@
 	margin: 0;
 
 	position: absolute;
-	top: 16px;
-	right: 16px;
+	top: var(--titlebar-button-spacing);
+	right: var(--titlebar-button-spacing);
 
 	.button_a22cb0.icon-only_a22cb0 {
 		@include controls.titlebar-button;

@@ -193,9 +193,9 @@
 	}
 }
 
-.modalHeaderButtons__9c3be {
-	inset-block-start: 16px;
-	inset-inline-end: 16px;
+.modalHeaderButtons_b92f52 {
+	inset-block-start: var(--titlebar-button-spacing);
+	inset-inline-end: var(--titlebar-button-spacing);
 
 	& > button {
 		@include controls.titlebar-button;

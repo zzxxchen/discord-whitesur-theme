@@ -17,8 +17,8 @@
 	color: inherit;
 
 	position: absolute;
-	top: 16px;
-	right: 16px;
+	top: var(--titlebar-button-spacing);
+	right: var(--titlebar-button-spacing);
 }
 
 // Do NOT use gap on root, since its parts are not always direct descendants of

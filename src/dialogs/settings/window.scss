@@ -217,8 +217,8 @@
 
 .tools__23e6b {
 	position: fixed;
-	top: calc(var(--p) + 16px);
-	right: calc(var(--p) + 16px);
+	top: calc(var(--p) + var(--titlebar-button-spacing));
+	right: calc(var(--p) + var(--titlebar-button-spacing));
 }
 
 .toolsContainer__23e6b {
