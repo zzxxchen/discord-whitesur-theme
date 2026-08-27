@@ -1,0 +1,22 @@
+/**
+ * @name Discord WhiteSur Theme
+ * @description A WhiteSur theme for Discord, following the macOS WhiteSur style.
+ * @author zzxxchen
+ */
+
+@import "https://raw.githubusercontent.com/zzxxchen/discord-whitesur-theme/dist/dist/index.css";
+
+:root {
+	/* Window controls */
+	/* on/off - flex/none */
+	--titlebar-close-button: flex;
+	--titlebar-maximize-button: flex;
+	--titlebar-minimize-button: flex;
+	/* also set this to how much buttons are visible */
+	--titlebar-buttons-count: 3;
+
+	/* Transparent sidebar */
+	--option-transparent-sidebar: false;
+	--option-transparent-sidebar-opacity: 75%;
+	--option-transparent-sidebar-opacity-secondary: 50%;
+}

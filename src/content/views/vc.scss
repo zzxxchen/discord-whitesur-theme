@@ -1,0 +1,157 @@
+@use "controls";
+@use "typography";
+
+%-dark-headerbar {
+	--headerbar_fg_color: #ffffff;
+
+	:root:not(.app-focused) & {
+		--headerbar_fg_color: color-mix(
+			in srgb,
+			#ffffff var(--dim-level-opacity),
+			transparent
+		);
+	}
+}
+
+// VC is permanently dark themed, so do the same for titlebar.
+//
+// prettier-ignore
+.base__5e434:has(
+	> .content__5e434
+	> .page__5e434
+	> div
+	> .chat_f75fb0
+	> .wrapper_cb9592
+) {
+	& > .bar_c38106,
+	.container__9293f{
+		@extend %-dark-headerbar;
+	}
+}
+
+// popout
+.container__9fa5a .button__201d5 {
+	height: unset;
+}
+
+.colorable_f1ceac {
+	@include controls.icon-button;
+
+	color: var(--window_fg_color);
+
+	&.disconnect_f1ceac,
+	&.redGlow_f1ceac {
+		color: var(--destructive-color);
+	}
+
+	&:not([aria-label]) {
+		// Assume soundboard button, since it doesn't have an aria-label, and
+		// pulls out the expression picker on hover instead of displaying a
+		// tooltip, fucking genius design
+		--icon: icon("bullhorn");
+	}
+}
+
+.attachedCaret_f1ceac {
+	box-sizing: border-box;
+}
+
+.attachedCaretButtonContainer_f1ceac {
+	@include controls.split-button(
+		$lhs: ".attachedButton_f1ceac",
+		$rhs: ".attachedCaret_f1ceac"
+	);
+
+	background-color: var(--hover_color);
+}
+
+.edgeControls_bfe55a {
+	gap: var(--spacing);
+}
+
+.headerBar__49508 {
+	@extend %-dark-headerbar;
+
+	.container__49508 {
+		[data-text-variant] {
+			@extend %caption;
+		}
+	}
+
+	.headerBarChildren__49508 {
+		gap: 0;
+	}
+
+	.playingText__49508 {
+		color: var(--window_fg_muted);
+	}
+
+	// avatar
+	.wrapper__44b0c {
+		width: var(--icon-size);
+		height: var(--icon-size);
+
+		// HELP
+		& > svg {
+			height: inherit;
+		}
+	}
+}
+
+.headerWrapper_cb9592 {
+	margin-inline: -12px;
+
+	.button__9db96 {
+		@include controls.icon-button;
+
+		color: inherit;
+		margin: 0;
+	}
+
+	[data-text-variant] {
+		filter: var(--text-shadow);
+	}
+}
+
+.overlayContainer__2f4f7 {
+	.experimentOverlayTitle__2f4f7 {
+		color: var(--window_fg_color);
+	}
+
+	.overlayButton__2f4f7 {
+		@include controls.icon-button-circular("settings");
+	}
+}
+.leftTrayIcon_cb9592,
+.rightTrayIcon_cb9592:not(.container__2d263) {
+	@include controls.icon-button-circular;
+
+	--accent-color: var(--window_fg_color);
+}
+
+// is it really useful ?
+.streamQualityIndicator__30845 {
+	display: none;
+}
+
+// the *actual* volume button
+.volumeButton__2d263 {
+	@include controls.icon-button-circular($name: "speaker-3");
+
+	&:has(.controlIcon_f1ceac > :only-child) {
+		--icon: icon("speaker-0");
+	}
+}
+
+.wrapper__1405b {
+	gap: var(--spacing-2x);
+
+	.fullRegionButton_f1ceac,
+	.fullRegionDropdownButton_f1ceac,
+	.buttonSection__1405b {
+		background-color: transparent;
+		gap: var(--spacing);
+		padding: 0;
+		border: none;
+	}
+}

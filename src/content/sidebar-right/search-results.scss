@@ -1,0 +1,74 @@
+@use "controls";
+@use "typography";
+
+.pageButton_c15210 {
+	@include controls.button;
+}
+
+.searchHeader_ae7890 {
+	border-bottom: 1px solid var(--secondary_sidebar_border_color);
+	padding: var(--spacing);
+
+	height: unset;
+
+	[data-text-variant] {
+		@extend %text-normal;
+	}
+}
+
+.searchResult__80bf8 {
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	margin: 0;
+}
+
+.searchResultChannelCategory__16eb0 {
+	@extend %caption;
+}
+
+.searchResultGroup_a7e67f {
+	--offset: calc(var(--document-font-size) * 1.25 + 16px);
+
+	@include controls.cards-container;
+
+	margin-bottom: calc(var(--offset) + 34px);
+
+	position: relative;
+	top: var(--offset);
+
+	.channelNameIcon_a7e67f,
+	.parentChannelName_a7e67f {
+		display: none;
+	}
+
+	.channelNameContainer_a7e67f {
+		position: absolute;
+		top: calc(var(--offset) * -1);
+	}
+
+	.channelNameText_a7e67f {
+		@extend %title-2;
+	}
+}
+
+.searchResultsWrap_a98f3b {
+	border-left: 1px solid var(--secondary_sidebar_border_color);
+
+	z-index: 0;
+
+	// Clicking on the message does the thing
+	.button__80bf8 {
+		display: none;
+	}
+
+	.container__80bf8 {
+		@include controls.card-in-container(
+			$activatable: true,
+			$first-selector: ":first-of-type",
+			$last-selector: ":last-of-type"
+		);
+
+		padding: 0;
+	}
+}

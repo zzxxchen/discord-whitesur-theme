@@ -1,0 +1,176 @@
+@use "controls";
+@use "typography";
+@use "util";
+
+.vc-addon-card {
+	@include controls.card-in-container(
+		$first-selector: ":first-child",
+		$last-selector: ":last-child"
+	);
+
+	&.vc-addon-card-disabled {
+		opacity: 1;
+	}
+
+	&:hover {
+		transform: unset;
+	}
+}
+
+.vc-addon-header {
+	gap: var(--spacing);
+}
+
+.vc-addon-note {
+	height: unset;
+}
+
+// Merged with the top card
+.vc-plugin-ui-elements-button {
+	--icon: icon("right");
+
+	@include controls.card-button-pseudo;
+
+	border-radius: 0 0 var(--card_radius) var(--card_radius);
+	margin: 0;
+
+	.vc-text-md {
+		@extend %title-3;
+	}
+}
+
+.vc-plugin-ui-elements-button-arrow {
+	display: none;
+}
+
+.vc-plugins-grid {
+	@include controls.cards-container;
+
+	gap: 0;
+	border: none;
+
+	grid-template-columns: 1fr;
+}
+
+.vc-plugins-info-button {
+	@include controls.icon-button;
+
+	margin: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	&::before {
+		display: none;
+	}
+
+	svg {
+		display: initial;
+	}
+}
+
+// Merge with the bottom card. Inconsistent, but ehhhh
+.vc-plugins-info-card {
+	border-radius: var(--card_radius) var(--card_radius) 0 0;
+	border-bottom: 1px solid var(--card_shade_color);
+	gap: var(--spacing);
+
+	height: unset;
+}
+
+.vc-plugins-info-icon {
+	color: var(--card_fg_color);
+
+	&.vc-cog-wheel {
+		--icon: icon("settings");
+	}
+}
+
+.vc-plugins-restart-button {
+	margin: 0;
+}
+
+.vc-settings-card {
+	margin-bottom: 34px;
+}
+
+.vc-settings-quickActions-card {
+	background-color: transparent;
+	gap: 0;
+	padding: 0;
+
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.vc-settings-quickActions-img {
+	// The GitHub link doesn't have a distinguishing class name
+	--icon: icon("external-link");
+
+	margin-left: auto;
+	margin-right: calc((var(--icon-button-size) - var(--icon-size)) / 2);
+	order: 1;
+}
+
+.vc-settings-quickActions-pill {
+	@include controls.card-in-container(
+		$first-selector: ":first-child",
+		$last-selector: ":last-child"
+	);
+	@include controls.card-button-pseudo;
+
+	&:hover {
+		transform: none;
+	}
+
+	// child svg does the job
+	&::after {
+		display: none;
+	}
+}
+
+.vc-settings-tab-bar {
+	margin-block: 0 16px;
+}
+
+.vc-settings-theme-grid {
+	@include controls.cards-container;
+
+	gap: 0;
+}
+
+.vcd-settings-category {
+	margin-bottom: 34px;
+}
+
+.vcd-settings-category-content {
+	gap: 0;
+}
+
+.vcd-settings-category-title {
+	@extend %title-3;
+}
+
+.vc-special-card {
+	// $purple_1
+	background-color: color-mix(in srgb, #dc8add 50%, transparent);
+}
+
+.vc-special-card-flex {
+	align-items: center;
+
+	.vc-donate-button {
+		@include controls.button-accent;
+	}
+
+	.vc-special-image-container {
+		background-color: transparent;
+	}
+
+	.vc-special-title {
+		color: inherit;
+	}
+}

@@ -1,0 +1,42 @@
+// Reference:
+// https://github.com/GNOME/libadwaita/blob/main/src/stylesheet/widgets/_labels.scss
+// https://github.com/GNOME/libadwaita/blob/main/src/stylesheet/widgets/_links.scss
+
+%caption {
+	color: var(--window_fg_muted);
+	font-weight: 400;
+	font-size: calc(15px * 0.82);
+}
+
+%link {
+	color: var(--accent-color);
+	text-decoration: underline;
+
+	&:hover {
+		color: hsl(from var(--accent-color) h calc(s * 1.1) calc(l * 1.1));
+	}
+
+	&:active {
+		color: var(--accent-color);
+	}
+}
+
+%title-1 {
+	font-weight: 800;
+	font-size: calc(11px * 1.81);
+}
+
+%title-2 {
+	font-weight: 800;
+	font-size: calc(11px * 1.36);
+}
+
+%title-3 {
+	font-weight: 700;
+	font-size: calc(11px * 1.36);
+}
+
+%title-4 {
+	font-weight: 700;
+	font-size: calc(11px * 1.18);
+}

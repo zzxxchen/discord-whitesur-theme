@@ -1,0 +1,20 @@
+#add_friend-tab {
+	& > header {
+		padding-inline: 0;
+	}
+}
+
+.addFriendInputWrapper__72ba7 {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.addFriendInput__72ba7 > input {
+	letter-spacing: 0;
+}
+
+.addFriendWumpusWrapper__72ba7 img {
+	bottom: calc(var(--space-4) * -1);
+}
