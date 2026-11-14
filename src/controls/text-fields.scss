@@ -1,15 +1,14 @@
 @use "controls";
 @use "util";
 
-.container__0f084 {
+.container_0PLWhS {
 	@include controls.text-field;
 
+	flex-wrap: nowrap;
 	gap: 0;
+	min-height: unset;
 	// Move padding to the <input> element because the wrapper can't get focused
 	padding: 0;
-
-	flex-wrap: nowrap;
-	min-height: unset;
 
 	input {
 		padding: 8px 9px;
@@ -17,22 +16,22 @@
 }
 
 // legacy
-.input__0ed4f {
+.input_b-mzk1 {
 	@include controls.text-field;
 
 	// + 1px
 	line-height: 1.25;
 }
 
-.icon__0f084 {
-	&:not(.button__0f084) {
+.icon_0PLWhS {
+	&:not(.button_0PLWhS) {
 		@include util.icon("loupe-large");
 
 		border: none;
 		margin-inline-start: 9px;
 	}
 
-	&.button__0f084 {
+	&.button_0PLWhS {
 		@include controls.icon-button("window-close");
 	}
 }

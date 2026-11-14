@@ -1,0 +1,97 @@
+@use "controls";
+@use "typography";
+
+.statusPickerModalMenu_nitlyF {
+	.label_M3qk4j {
+		margin: 0;
+	}
+
+	// why the fuck is this in the same component as menu
+	.statusAccessory_M3qk4j {
+		margin-inline-start: -2px;
+	}
+}
+
+.menuItem_nitlyF {
+	--icon: icon("right");
+
+	.menuOverlay_nitlyF:first-child & {
+		&:first-child {
+			--icon: icon("edit");
+		}
+
+		&:nth-child(2) > .menuItemInner_nitlyF {
+			// awful
+			$colors: (
+				online: "var(--success-color)",
+				idle: "var(--warning-color)",
+				dnd: "var(--destructive-color)",
+				offline: "var(--window-fg-muted)",
+			);
+
+			@each $status, $color in $colors {
+				&:has([mask="url(#svg-mask-status-#{$status})"]) {
+					color: #{$color};
+				}
+
+				@at-root #set-status-submenu-#{$status} {
+					color: #{$color};
+				}
+			}
+		}
+	}
+
+	.menuOverlay_nitlyF:nth-child(2) &:nth-child(2) {
+		--icon: icon("edit-copy");
+
+		& > .menuItemInner_nitlyF {
+			border: none;
+		}
+	}
+
+	&::after {
+		display: none;
+	}
+}
+
+.menuItemContent_nitlyF {
+	flex-direction: row-reverse;
+	padding: 0;
+}
+
+.menuItemIcon_nitlyF {
+	@include controls.icon-button;
+
+	pointer-events: all;
+}
+
+.menuItemInner_nitlyF {
+	@include controls.card;
+
+	border-block-end: 1px solid var(--card-shade-color);
+	border-radius: 0;
+	box-shadow: none;
+	pointer-events: none;
+}
+
+.menuItemLabelText_nitlyF {
+	@extend %heading;
+
+	color: inherit;
+}
+
+.menuOverlay_nitlyF {
+	border-radius: 0;
+	padding: 0;
+}
+
+.menus_nitlyF {
+	@include controls.cards-container;
+
+	gap: 0;
+	overflow: hidden;
+}
+
+.submenuIconWrapper_nitlyF {
+	display: none;
+}

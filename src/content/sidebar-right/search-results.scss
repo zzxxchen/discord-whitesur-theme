@@ -1,22 +1,47 @@
 @use "controls";
 @use "typography";
+@use "util";
 
-.pageButton_c15210 {
-	@include controls.button;
+// Message
+.container_N3Anbl {
+	@include controls.card-in-container(
+		$activatable-selector: "&",
+		$first-selector: "&:first-of-type",
+		$last-selector: "&:last-of-type"
+	);
+
+	padding: 0;
+
+	// Clicking on the message does the thing
+	.button_N3Anbl {
+		display: none;
+	}
 }
 
-.searchHeader_ae7890 {
-	border-bottom: 1px solid var(--secondary_sidebar_border_color);
+.paginationDock_QHVbp3 {
+	border: none;
+	// --elevation-low
+	box-shadow:
+		0 -1px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent),
+		0 -2px 4px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent);
+}
+
+.searchHeader_DAJqRF {
+	border: none;
+	box-shadow: var(--elevation-low);
 	padding: var(--spacing);
+	padding-inline-start: var(--spacing-2x);
 
-	height: unset;
-
-	[data-text-variant] {
+	[data-text-variant="body-md/normal"] {
 		@extend %text-normal;
 	}
 }
 
-.searchResult__80bf8 {
+.searchModeAndFiltersContainer_DAJqRF {
+	gap: var(--spacing);
+}
+
+.searchResult_N3Anbl {
 	background-color: transparent;
 	border: none;
 	border-radius: 0;
@@ -27,48 +52,31 @@
 	@extend %caption;
 }
 
-.searchResultGroup_a7e67f {
-	--offset: calc(var(--document-font-size) * 1.25 + 16px);
+.searchResultGroup_3Zk3yP {
+	--offset: calc(1rem + 16px);
 
 	@include controls.cards-container;
 
-	margin-bottom: calc(var(--offset) + 34px);
-
+	inset-block-start: var(--offset);
+	margin-block-end: calc(var(--offset) + 34px);
 	position: relative;
-	top: var(--offset);
 
-	.channelNameIcon_a7e67f,
-	.parentChannelName_a7e67f {
+	.channelNameIcon_3Zk3yP,
+	.parentChannelName_3Zk3yP {
 		display: none;
 	}
 
-	.channelNameContainer_a7e67f {
+	.channelNameContainer_3Zk3yP {
+		inset-block-start: calc(var(--offset) * -1);
 		position: absolute;
-		top: calc(var(--offset) * -1);
-	}
-
-	.channelNameText_a7e67f {
-		@extend %title-2;
 	}
 }
 
-.searchResultsWrap_a98f3b {
-	border-left: 1px solid var(--secondary_sidebar_border_color);
+.searchResultsWrap_QHVbp3 {
+	// This looks awesome actually
+	z-index: 999;
 
-	z-index: 0;
-
-	// Clicking on the message does the thing
-	.button__80bf8 {
-		display: none;
-	}
-
-	.container__80bf8 {
-		@include controls.card-in-container(
-			$activatable: true,
-			$first-selector: ":first-of-type",
-			$last-selector: ":last-of-type"
-		);
-
-		padding: 0;
+	.scroller_QHVbp3 {
+		padding-inline: 24px;
 	}
 }

@@ -2,7 +2,7 @@
 @use "typography";
 @use "util";
 
-.sidebar__5e434 {
+.sidebar_pog62O {
 	background: none;
 	border-radius: 0;
 
@@ -11,18 +11,18 @@
 	}
 }
 
-.sidebarList__5e434 {
+.sidebarList_pog62O {
 	background: var(
 		--background-gradient-app-frame,
-		var(--background-secondary-alt)
+		var(--secondary-sidebar-bg-color)
 	);
 	border: none;
-	border-inline-end: 1px solid var(--secondary_sidebar_border_color);
+	border-inline-end: 1px solid var(--secondary-sidebar-border-color);
 	border-radius: 0;
 
-	.container__2637a {
-		padding-block-end: var(--custom-app-panels-height);
+	.container_H5ozaj {
 		margin: 0;
+		padding-block-end: var(--custom-app-panels-height);
 	}
 }
 
@@ -30,42 +30,39 @@
 	margin: 0;
 }
 
-.wrapper__2ea32 {
-	color: var(--window_fg_color);
+.wrapper_TNyK-N {
+	color: var(--window-fg-color);
 
-	&.modeMuted__2ea32 {
-		color: var(--window_fg_muted);
+	&.modeMuted_TNyK-N {
+		color: var(--window-fg-muted);
 	}
 
-	&.typeThread__2ea32 {
+	&.typeThread_TNyK-N {
 		--spine-width: 10px;
-		margin-left: calc(
+
+		margin-inline-start: calc(
 			var(--channels-spine-offset-left) + var(--spine-width) + var(--space-xs)
 		);
 	}
 
-	.channelInfo_c69b6d {
+	.channelInfo_Wx6SnQ {
 		margin: 0;
-	}
-
-	[data-text-variant="text-xs/semibold"] {
-		@extend %text-normal;
 	}
 }
 
 // Header
-.wrapperCommon__29444 {
+.wrapperCommon_yOdhm_ {
 	--icon: icon("pan-down");
 
-	&.collapsed__29444 {
+	&.collapsed_yOdhm_ {
 		--icon: icon("pan-up");
 	}
 
 	&:not(:hover) {
-		color: var(--window_fg_muted);
+		color: var(--window-fg-muted);
 	}
 
-	.icon__29444 {
+	.icon_yOdhm_ {
 		@include util.icon;
 
 		transform: none;
@@ -75,70 +72,70 @@
 		}
 	}
 
-	.mainContent__29444 {
-		gap: var(--space-xs);
-
+	.mainContent_yOdhm_ {
 		flex-direction: row-reverse;
+		gap: var(--space-xs);
 		justify-content: start;
 	}
 
-	.name__29444 {
-		@extend %title-4;
-
+	.name_yOdhm_ {
 		color: inherit;
 	}
 }
 
 // "Browse channels", since it's fucking useless
-.basicChannelRowLink__2ea32,
-.sectionDivider__629e4,
-.sectionDivider__629e4 + [style="height: 12px;"] {
+.basicChannelRowLink_TNyK-N,
+.sectionDivider_ysO7Gy,
+.sectionDivider_ysO7Gy + [style="height: 12px;"] {
 	display: none;
 }
 
-.children__2ea32 {
+.children_TNyK-N {
 	// Use the context menu instead
-	.iconItem_c69b6d {
+	.iconItem_Wx6SnQ {
 		display: none;
 	}
 }
 
-.icon__2ea32 {
+.icon_TNyK-N {
 	display: none;
 }
 
-:where(.iconContainer__2ea32) {
+:where(.iconContainer_TNyK-N) {
 	// Align with Discord
 	@include util.icon("lang-include");
 }
 
-.link__2ea32 {
+.link_TNyK-N {
 	@include controls.button-basic-raised;
 
-	transition: none;
 	background-color: transparent;
 	color: inherit;
 	// Originally --space-xxs, but it's at a constant 4px. This is put here in
 	// order to not fuck with the virtualized list, since --space-xxs is edited.
 	padding-block: var(--space-4);
+	transition: none;
 
-	.modeSelected__2ea32 & {
+	.modeSelected_TNyK-N & {
 		@include controls.button-selected;
 	}
 }
 
-.name__2ea32 {
+.name_TNyK-N {
 	@extend %text-normal;
+
+	[data-text-variant="body-md/medium"] {
+		font: inherit;
+	}
 }
 
-.spine__5b40b {
-	color: var(--window_fg_color);
+.spine_reDhww {
+	color: var(--window-fg-color);
 }
 
-.unread__2ea32 {
-	margin: 0;
-
-	top: var(--space-4);
-	left: calc(var(--space-xs) * -1);
+.unread_TNyK-N {
 	height: calc(100% - var(--space-4) * 2);
+	inset-block-start: var(--space-4);
+	inset-inline-start: calc(var(--space-xs) * -1);
+	margin: 0;
 }

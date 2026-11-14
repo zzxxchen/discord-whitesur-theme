@@ -17,6 +17,13 @@
 	}
 }
 
+// Hide the "Send a gift" button - this is mostly the reason why the adblocker
+// userstyle is used, but it's laggy and I don't care enough to make a codeberg
+// account to fix it.
+.container_ejC3ZL {
+	display: none;
+}
+
 // Dynamic attributes
 [aria-label^="Remove answer"] {
 	--icon: icon("window-close");
@@ -39,13 +46,7 @@
 		"Forward": "mail-forward",
 		"Open in Browser": "external-link",
 		"Zoom In": "loupe-plus-large",
-		"Zoom Out": "loupe-minus-large",
-
-		// User profile popout
-		"Add Friend": "plus",
-		"Add Role": "plus",
-		"Friend": "person",
-		"Open in Mod View": "key5"
+		"Zoom Out": "loupe-minus-large"
 	)
 );
 
@@ -54,7 +55,16 @@
 	"aria-label",
 	(
 		// Inbox
-		"Mark As Read": "check-plain"
+		"Edit Reminder": "edit",
+		"Mark As Read": "check-plain",
+		"Remove Bookmark": "window-close",
+		"Remove Reminder": "window-close",
+
+		// User profile popout
+		"Add Friend": "plus",
+		"Friend": "person",
+		"Message": "chat",
+		"Open in Mod View": "key5"
 	)
 );
 
@@ -73,6 +83,7 @@
 		"Open Translate Modal": "translate",
 
 		// Message actions
+		"Clear history": "history-undo",
 		"Translate": "translate",
 
 		// User profile popout
@@ -85,8 +96,6 @@
 	"aria-label",
 	(
 		"Add to DM": "contact-new",
-		// TODO(experiment): remove later ? nitro only
-		"Bookmarks": "user-bookmarks",
 		"DevTools": "build-alt",
 		// VC (not a mistake, actually D*scord; "Show Chat" is the same)
 		"Hide chat": "chat",
@@ -144,21 +153,25 @@
 );
 
 // Home page
-@include -gen-icons(
-	"aria-label",
-	(
-		"Accept": "check-plain",
-		"Cancel": "window-close",
-		"Ignore": "window-close",
-		"Message": "chat-bubbles-empty-inverted",
-	)
-);
+.peopleColumn_zrUwGA {
+	@include -gen-icons(
+		"aria-label^",
+		(
+			"Accept": "check-plain",
+			"Cancel": "window-close",
+			"Ignore": "window-close",
+			"Message": "chat-bubbles-empty-inverted",
+			"More options": "menu",
+		)
+	);
+}
 
 // Message actions
 @include -gen-icons(
 	"aria-label",
 	(
 		"Add Reaction": "reaction-add2",
+		"Bookmark Message": "user-bookmarks",
 		"Copy Link": "edit-copy",
 		"Create Thread": "chat",
 		"Delete": "user-trash",
@@ -215,39 +228,43 @@
 	)
 );
 
-// Settings dialog
+// User settings, sorted by section
 @include -gen-icons(
 	"data-list-item-id",
 	(
-		// User settings
-		"settings-sidebar___accessibility_panel": "body",
-		"settings-sidebar___account_panel": "person",
-		"settings-sidebar___activity_privacy_panel": "user-not-tracked",
-		"settings-sidebar___authorized_apps_panel": "grid-large",
-		"settings-sidebar___connected_apps_panel": "link",
-		"settings-sidebar___connections_panel": "phonelink",
-		"settings-sidebar___content_and_social_panel": "shield-full",
-		"settings-sidebar___data_and_privacy_panel": "screen-privacy4",
-		"settings-sidebar___developer_panel": "build-alt",
-		"settings-sidebar___developer_options_panel": "build",
-		"settings-sidebar___appearance_panel": "color-palette",
-		"settings-sidebar___experiments_panel": "test",
-		"settings-sidebar___family_center_panel": "eye-open-negative-filled",
-		"settings-sidebar___keybinds_panel": "keyboard3",
-		"settings-sidebar___language_and_time_panel": "translate",
-		"settings-sidebar___logout_sidebar_item": "system-log-out",
-		"settings-sidebar___messaging_permissions_panel": "messaging-permissions",
-		"settings-sidebar___notifications_panel": "bell-outline",
-		"settings-sidebar___sessions_panel": "smartphone",
-		"settings-sidebar___system_panel": "prefs-tweaks",
 		"settings-sidebar___vencord_main_panel": "settings",
 		"settings-sidebar___vencord_cloud_panel": "cloud-filled",
-		"settings-sidebar___vencord_deprecated_custom_Vesktop_panel": "appearance",
 		"settings-sidebar___vencord_plugins_panel": "puzzle-piece",
 		"settings-sidebar___vencord_themes_panel": "tool-brush",
 		"settings-sidebar___vencord_updater_panel": "update",
 		"settings-sidebar___vencord_backup_restore_panel": "history-undo",
-		"settings-sidebar___voice_and_video_panel": "microphone"
+		"settings-sidebar___vesktop_panel": "settings",
+
+		"settings-sidebar___account_panel": "person",
+		"settings-sidebar___data_and_privacy_panel": "screen-privacy4",
+		"settings-sidebar___messaging_permissions_panel": "messaging-permissions",
+		"settings-sidebar___notifications_panel": "bell-outline",
+
+		"settings-sidebar___voice_and_video_panel": "microphone",
+		"settings-sidebar___appearance_panel": "color-palette",
+		"settings-sidebar___accessibility_panel": "body",
+		"settings-sidebar___system_panel": "prefs-tweaks",
+		"settings-sidebar___language_and_time_panel": "translate",
+
+		"settings-sidebar___registered_games_panel": "xbox-controller",
+		"settings-sidebar___activity_privacy_panel": "user-not-tracked",
+		"settings-sidebar___connected_apps_panel": "link",
+		"settings-sidebar___connections_panel": "phonelink",
+		"settings-sidebar___content_and_social_panel": "shield-full",
+		"settings-sidebar___authorized_apps_panel": "grid-large",
+		"settings-sidebar___family_center_panel": "eye-open-negative-filled",
+		"settings-sidebar___keybinds_panel": "keyboard3",
+		"settings-sidebar___sessions_panel": "smartphone",
+
+		"settings-sidebar___developer_panel": "build-alt",
+		"settings-sidebar___developer_options_panel": "build",
+		"settings-sidebar___experiments_panel": "test",
+		"settings-sidebar___logout_sidebar_item": "system-log-out",
 	)
 );
 
@@ -285,7 +302,8 @@
 	)
 );
 
-// Override Vencord's built-in icon for Themes
-[data-list-item-id="settings-sidebar___vencord_themes_panel"] .vc-icon.vc-paintbrush-icon {
+// Vencord ships its own paintbrush icon for the Themes panel; keep WhiteSur's
+[data-list-item-id="settings-sidebar___vencord_themes_panel"]
+	.vc-icon.vc-paintbrush-icon {
 	--icon: icon("tool-brush") !important;
 }

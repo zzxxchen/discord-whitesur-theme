@@ -1,20 +1,42 @@
+@use "controls";
+@use "util";
+
 #add_friend-tab {
 	& > header {
 		padding-inline: 0;
 	}
+
+	[data-text-variant="heading-md/medium"] {
+		@extend %text-normal;
+	}
 }
 
-.addFriendInputWrapper__72ba7 {
+.addFriendInput_jF-DiS {
+	padding-block: var(--spacing);
+}
+
+.addFriendInputWrapper_jF-DiS {
 	background-color: transparent;
 	border: none;
-	padding: 0;
 	margin: 0;
+	padding: 0;
 }
 
-.addFriendInput__72ba7 > input {
+.addFriendUsernameRow_jF-DiS {
+	padding: 0;
+}
+
+.addFriendWumpusWrapper_jF-DiS img {
+	inset-block-end: calc(var(--space-8) * -1);
+}
+
+.friendNoteTextArea_jF-DiS {
+	@include controls.text-field;
+
 	letter-spacing: 0;
 }
 
-.addFriendWumpusWrapper__72ba7 img {
-	bottom: calc(var(--space-4) * -1);
+.friendNoteTextContainer_jF-DiS {
+	border: none;
+	padding: 0;
 }

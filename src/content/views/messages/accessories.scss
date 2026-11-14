@@ -2,13 +2,11 @@
 @use "typography";
 
 @mixin -file-name {
-	@extend %title-3;
-
-	color: var(--card_fg_color);
-	text-decoration: none;
-
+	color: var(--card-fg-color);
+	font-weight: normal;
 	// Use the download icon instead
 	pointer-events: none;
+	text-decoration: none;
 }
 
 @mixin -media-button($osd, $name) {
@@ -25,16 +23,16 @@
 	gap: var(--spacing);
 
 	@include controls.slider(
-		".mediaBarWrapper_b26b79",
-		".mediaBarProgress_b26b79",
-		".mediaBarGrabber_b26b79"
+		".mediaBarWrapper_s1cr3c",
+		".mediaBarProgress_s1cr3c",
+		".mediaBarGrabber_s1cr3c"
 	);
 
-	.durationTimeWrapper_cf09d8 {
+	.durationTimeWrapper_FJ99sr {
 		margin: 0;
 	}
 
-	.fakeEdges_b26b79 {
+	.fakeEdges_s1cr3c {
 		border-radius: 999px;
 
 		&::before,
@@ -43,28 +41,26 @@
 		}
 	}
 
-	.mediaBarGrabber_b26b79 {
-		margin-top: 0;
-
-		left: 0;
+	.mediaBarGrabber_s1cr3c {
+		inset-inline-start: 0;
+		margin-block-start: 0;
 	}
 
-	.mediaBarWrapper_b26b79 {
+	.mediaBarWrapper_s1cr3c {
 		box-shadow: none;
 
-		.buffer_b26b79 {
+		.buffer_s1cr3c {
 			background-color: color-mix(in srgb, currentColor 30%, transparent);
 		}
 	}
 
-	.videoButton_cf09d8 {
+	.videoButton_FJ99sr {
 		@include -media-button($osd, $name: "play");
 
+		flex-shrink: 0;
 		margin: 0;
 
-		flex-shrink: 0;
-
-		&.button__201d5 {
+		&.button_9OQtot {
 			--icon: icon("view-fullscreen");
 		}
 
@@ -73,82 +69,37 @@
 		}
 	}
 
-	.volumeButton__2d263 {
+	.volumeButton_QlL4f- {
 		@include -media-button($osd, $name: "speaker-3");
 
 		color: inherit;
 
 		// No other way to identify state as of writing this
-		&:has(.controlIcon_cf09d8 > [d$="1.4Z"]) {
+		&:has(.controlIcon_FJ99sr > [d$="1.4Z"]) {
 			--icon: icon("speaker-0");
 		}
 	}
 }
 
-// D*scord put an !important here, el mao
-.visual-refresh .buttonsInner__5126c {
-	@include controls.osd-like-button-group;
-
-	border: none;
-	box-shadow: none;
-
-	.hoverBarButton_f84418 {
-		@include controls.osd-like-button;
-
-		// :has is for reactions
-		&:is([aria-label="Copy Message ID"], :has(> .buttonContent_f84418)) {
-			&::before {
-				display: none;
-			}
-
-			.icon_f84418 {
-				transform: none;
-
-				display: initial;
-			}
-		}
-
-		&[aria-label="Delete"] {
-			color: var(--destructive-color);
-		}
-	}
-
-	.separator_f84418 {
-		// 65% (from $osd_bg_color) / 2
-		background-color: color-mix(in srgb, currentColor 32.5%, transparent);
-		margin: 0 var(--spacing);
-
-		height: calc(100% - var(--spacing-2x) + #{controls.$osd-like-padding} * 2);
-	}
-}
-
 // Accessories container
-.container_b7e1cb {
+.container_YUQhib {
 	gap: var(--spacing);
 }
 
-// Message actions
-.container__040f0 {
-	padding: 0;
-
-	inset-block-start: calc(
-		var(--icon-button-size) * -1 - #{controls.$osd-like-padding} * 2
-	);
-}
-
 // Fancy codeblock (modal included, since it's one component)
-.container__4d95d,
-.modalContent__4d95d {
+.container_BOOBu-,
+.modalContent_BOOBu- {
 	@include controls.card;
 
 	padding: 0;
 
-	.codeView__4d95d {
-		padding: 10px 16px;
+	.codeView_BOOBu- {
+		background: none;
 		margin: 0;
+		padding: 10px 16px;
 	}
 
-	.expandCollapseSection__4d95d {
+	.expandCollapseSection_BOOBu- {
 		margin: 0;
 
 		button {
@@ -160,21 +111,19 @@
 		}
 	}
 
-	.fileName__4d95d {
-		@extend %title-3;
-
-		color: inherit;
+	.fileName_BOOBu- {
+		@extend %text-normal;
 	}
 
-	.footer__4d95d,
-	.modalFooter__4d95d {
+	.footer_BOOBu-,
+	.modalFooter_BOOBu- {
 		background-color: transparent;
-		color: var(--card_fg_color);
 		border: none;
 		border-radius: var(--card_radius);
+		color: var(--card-fg-color);
 		gap: var(--spacing);
-		padding: 0;
 		margin: var(--spacing) 16px;
+		padding: 0;
 
 		[role="button"] {
 			@include controls.icon-button;
@@ -183,77 +132,73 @@
 
 			// Used as a popover anchor
 			svg {
-				visibility: hidden;
 				display: block;
+				visibility: hidden;
 			}
 		}
 	}
 
-	.footerGap__4d95d {
+	.footerGap_BOOBu- {
 		display: none;
 	}
 
-	.languageIcon__4d95d {
+	.languageIcon_BOOBu- {
 		--icon: icon("lang-include");
 	}
 
-	.nameSection__4d95d {
+	.nameSection_BOOBu- {
 		margin-inline-end: auto;
-
 		order: -1;
 	}
 
-	.openFullPreviewSection__4d95d {
+	.openFullPreviewSection_BOOBu- {
 		--icon: icon("view-fullscreen");
 	}
 
-	.modalTextContainer__4d95d,
-	.textContainer__4d95d {
+	.modalTextContainer_BOOBu-,
+	.textContainer_BOOBu- {
 		background-color: color-mix(in srgb, currentColor 3%, transparent);
 		border: none;
-		border-bottom: 1px solid var(--card_shade_color);
+		border-block-end: 1px solid var(--card-shade-color);
 		border-radius: var(--card_radius) var(--card_radius) 0 0;
+		min-height: unset;
 	}
 }
 
 // Poll
-.container__0be77 {
-	.answer__4c520 {
+.container_HOJNvw {
+	@include controls.card;
+
+	.answer_D4-WfD {
 		align-items: center;
 		min-height: unset;
 	}
 
-	.answerInner__4c520 {
+	.answerInner_D4-WfD {
 		display: contents;
 	}
 
-	.answersContainer__4c520 {
+	.answersContainer_D4-WfD {
 		margin-block: var(--spacing-2x);
 	}
 
-	.answerSelectionIcon__4c520 {
-		box-sizing: border-box;
-	}
-
-	.bottomBar__0be77 {
+	.bottomBar_HOJNvw {
 		min-height: unset;
 	}
 
-	.label__4c520 {
+	.label_D4-WfD {
 		@extend %text-normal;
-
-		color: inherit;
 
 		order: 1;
 	}
 
-	.secondaryAction__0be77 {
+	.secondaryAction_HOJNvw {
 		align-items: center;
 	}
 }
 
 // Poll results
-.container_f69538 {
+.container_D5ZFqQ {
 	@include controls.card;
 
 	[data-text-variant] {
@@ -264,194 +209,177 @@
 }
 
 // Voice message
-.container_a8e786 {
+.container_seLrDE {
 	@include controls.card;
 
-	.playbackRate_a8e786 {
+	.playbackRate_seLrDE {
 		@include controls.button;
-
-		box-sizing: border-box;
 	}
 
-	.rippleContainer_a8e786 {
+	.rippleContainer_seLrDE {
 		border: none;
 	}
 }
 
-.embedFull__623de {
+.embedFull_XyW1ZT {
 	background-color: color-mix(in srgb, currentColor 3%, transparent);
-	border-top: none;
-	border-right: none;
-	border-bottom: none;
-	border-left-width: var(--radius-xs);
+	border-block: none;
+	border-inline-end: none;
+	border-inline-start-width: var(--radius-xs);
 	border-radius: var(--radius-xs);
 
-	.grid__623de {
+	.grid_XyW1ZT {
 		padding: 12px 8px;
 	}
 
-	.anchor_edefb8 {
+	.anchor_R6ReNl {
 		color: inherit;
 		text-decoration: none;
 	}
 
-	.embedAuthor__623de {
+	.embedAuthor_XyW1ZT {
 		margin: 0;
 
-		.embedAuthorName__623de[href] {
-			@extend %caption;
+		.embedAuthorName_XyW1ZT[href] {
+			@extend %text-normal;
 		}
 	}
 
-	.embedFooterText__623de {
+	// this has a text-xs/medium class name, but from another component? what
+	.embedFooterText_XyW1ZT {
 		@extend %caption;
 	}
 
-	:where(.embedMargin__623de) {
-		margin-top: var(--spacing);
+	:where(.embedMargin_XyW1ZT) {
+		margin-block-start: var(--spacing);
 	}
 
-	.embedSuppressButton__623de {
+	.embedSuppressButton_XyW1ZT {
 		@include controls.icon-button("window-close");
 
+		inset-block-start: 0;
+		inset-inline-end: calc(var(--icon-button-size) * -1 - var(--spacing));
 		position: absolute;
-		top: 0;
-		right: calc(var(--icon-button-size) * -1 - var(--spacing));
 	}
 
 	// Video actions
-	.wrapper__926d7 {
+	.wrapper_lj7V-K {
 		--icon-button-size: calc(34px * 2);
 		--icon-size: calc(16px * 2);
 
 		background-color: transparent;
 		gap: var(--spacing);
+		height: unset;
 		padding: 0;
 
-		height: unset;
-
-		.iconWrapper__926d7 {
+		.iconWrapper_lj7V-K {
 			@include controls.icon-button-circular("play");
 
 			opacity: 1;
 
-			&.anchor_edefb8 {
+			&.anchor_R6ReNl {
 				--icon: icon("external-link");
 			}
 		}
 	}
 }
 
-.embedDescription__623de {
+.embedDescription_XyW1ZT {
 	@extend %text-normal;
 }
 
-.embedVideo__623de {
+.embedVideo_XyW1ZT {
 }
 
-.embedMedia__623de {
+.embedMedia_XyW1ZT {
 	border-radius: var(--radius-xs);
 }
 
-.embedProvider__623de {
-	@extend %title-1;
+.embedProvider_XyW1ZT {
+	@extend %title-4;
 }
 
-.embedTitle__623de {
+.embedTitle_XyW1ZT {
 	@extend %text-normal;
 }
 
 // Server invite
-.guildInviteContainer__083ae {
+.guildInviteContainer_fknPy8 {
 	@include controls.card;
 
 	padding: 0;
+
+	.footer_fknPy8:not(.floatingFooter_fknPy8) .footerContent_fknPy8 {
+		background: none;
+	}
 }
 
 // Expired server invite
-.wrapper_d5f3cd {
+.wrapper_jsxF_b {
 	@include controls.card;
 
-	.guildIcon_d5f3cd {
+	.guildIcon_jsxF_b {
 		border-radius: 999px;
 	}
 
-	.inviteDestination_d5f3cd {
+	.inviteDestinationExpired_jsxF_b {
 		margin: 0;
 	}
 
-	.inviteSplash_d5f3cd {
-		border-top-right-radius: inherit;
-		border-top-left-radius: inherit;
+	.inviteSplash_jsxF_b {
+		border-start-start-radius: inherit;
+		border-start-end-radius: inherit;
 		margin: -10px -16px;
-		margin-bottom: 10px;
+		margin-block-end: 10px;
 	}
 }
 
-.hoverButtonGroup__06ab4 {
+.hoverButtonGroup_n2rO26 {
 	background-color: transparent;
-	outline: none;
 	gap: var(--spacing);
+	inset-block-start: var(--spacing);
+	inset-inline-end: var(--spacing);
+	outline: none;
 
-	top: var(--spacing);
-	right: var(--spacing);
-
-	.hoverButton__06ab4 {
+	.hoverButton_n2rO26 {
 		@include controls.icon-button-circular("folder-download");
 
-		// %link
-		&:hover {
-			color: white;
-		}
-
-		&.removeMosaicItemHoverButton__6c706 {
+		&.removeMosaicItemHoverButton_BwHv05 {
 			--icon: icon("window-close");
 		}
 	}
 }
 
-.markup__75297 {
-	.codeActions__75297 {
-		display: block;
-		top: 10px;
-		right: 10px;
-
-		& > div {
-			@include controls.icon-button("edit-copy");
-		}
-	}
-
-	.hljs {
-		@include controls.card;
-
-		// 6px shadow spread + 2px Y offset
-		margin-bottom: 8px;
-	}
-}
-
 // Open thread button
-.container__9271d {
+.container_g2fiji {
 	@include controls.button;
 
-	margin-top: var(--spacing);
-
 	height: unset;
+	line-height: 1.2;
+	margin-block-start: var(--spacing);
 
-	.cta__9271d {
+	.bottomLine_g2fiji {
+		// already text-sm, have to think of a way to exclude * from buttons
+		@extend %caption;
+
+		margin-block-start: 4px;
+	}
+
+	.cta_g2fiji {
 		text-decoration: none;
 	}
 }
 
-.file__0ccae {
+.file_-9z-XO {
 	@include controls.card;
 
-	.fileNameLink__0ccae {
+	.fileNameLink_-9z-XO {
 		@include -file-name;
 	}
 }
 
 // Video play button
-.iconWrapper__6eb54 {
+.iconWrapper_ifLhOx {
 	--icon-button-size: calc(34px * 2);
 	--icon-size: calc(16px * 2);
 
@@ -460,65 +388,63 @@
 	opacity: 1;
 }
 
-.imageAccessory_af017a {
-	.gifFavoriteButton__43deb {
+.imageAccessory_W6wEGA {
+	.gifFavoriteButton_cT9zhv {
 		@include controls.icon-button-circular("star-outline-rounded");
 
-		&.selected__43deb {
+		&.selected_cT9zhv {
 			--icon: icon("star-large");
 		}
 	}
 }
 
-.oneByOneGridSingle_f4758a {
+.oneByOneGridSingle_idVBIj {
 	border-radius: var(--radius-md);
 }
 
-.reaction__23977 {
+.reaction_MmKct8 {
 	border: none;
+	margin-block-end: var(--spacing);
+	margin-inline-end: var(--spacing);
 	padding: 0;
-	margin-right: var(--spacing);
-	margin-bottom: var(--spacing);
 
-	&.reactionMe__23977 {
+	&.reactionMe_MmKct8 {
 		color: var(--accent-color);
 	}
 
 	// Super reaction
-	.burstGlow__23977 {
+	.burstGlow_MmKct8 {
 		display: none;
 	}
 
-	.reactionCount__23977 {
+	.reactionCount_MmKct8 {
 		color: inherit;
 	}
 
-	.reactionInner__23977 {
+	.reactionInner_MmKct8 {
 		@include controls.button;
 
 		background-color: inherit;
-
 		height: unset;
 	}
 }
 
-.reactionBtn__23977 {
+.reactionBtn_MmKct8 {
 	@include controls.icon-button("reaction-add2");
 
 	border: none;
-	margin-right: var(--spacing);
-	margin-bottom: var(--spacing);
+	margin-inline-end: var(--spacing);
+	margin-block-end: var(--spacing);
 }
 
-.videoControls_cf09d8 {
+.videoControls_FJ99sr {
 	@include -media-controls($osd: true);
 	@include controls.osd-like-button-group;
 
+	height: unset;
 	margin-block: calc(var(--spacing) + 10px);
 	margin-inline: var(--spacing);
-
 	width: calc(100% - var(--spacing) * 3);
-	height: unset;
 
 	// bruh d*scord
 	&:not([style="transform: translateY(0%);"]) {
@@ -526,17 +452,17 @@
 	}
 }
 
-.wrapperAudio_cf09d8 {
+.wrapperAudio_FJ99sr {
 	@include controls.card;
 
-	.audioControls_cf09d8 {
+	.audioControls_FJ99sr {
 		@include -media-controls($osd: false);
 
 		background-color: transparent;
-		margin-top: var(--spacing-2x);
+		margin-block-start: var(--spacing-2x);
 	}
 
-	.audioMetadata_cf09d8 {
+	.audioMetadata_FJ99sr {
 		--icon-size: 48px;
 
 		align-items: center;
@@ -544,21 +470,21 @@
 		&::before {
 			background-image: icon("audio-x-generic", "other");
 			filter: var(--text-shadow);
-
-			width: var(--icon-size);
 			height: var(--icon-size);
+			width: var(--icon-size);
 		}
 	}
 
-	.metadataContent_cf09d8 {
+	.metadataContent_FJ99sr {
 		padding-inline: var(--spacing-2x);
 	}
 
-	.metadataDownload_cf09d8 {
+	.metadataDownload_FJ99sr {
 		@include -file-name;
 	}
 
-	.metadataSize_cf09d8 {
+	// this has a text-xs/medium class name, but from another component? what
+	.metadataSize_FJ99sr {
 		@extend %caption;
 
 		opacity: 1;

@@ -1,51 +1,108 @@
 @use "controls";
+@use "util";
 
-.headerRow_f369db {
-	background-color: transparent;
+.card_BkGrJJ {
+	padding: 0;
+}
+
+.container_owUmX8 {
+	background: none;
+
+	button {
+		--icon: icon("user-bookmarks");
+	}
+
+	.formContainer_owUmX8 {
+		padding: 0;
+	}
+
+	.title_owUmX8 {
+		@include controls.text-field;
+	}
+}
+
+.header_BkGrJJ {
+	background: none;
+	border: none;
 	box-shadow: none;
 	padding: 0;
-	margin-bottom: var(--spacing-2x);
+}
+
+.headerRow_BkGrJJ {
+	background-color: transparent;
+	box-shadow: none;
+	margin-block-end: 24px;
+	padding: 0;
 
 	&:hover {
 		background-color: transparent;
 	}
 }
 
-.list_f369db > .content__99f8c {
+.list_BkGrJJ > .content_JFqgFB {
 	--custom-forum-post-form-horizontal-padding: 0px;
+
 	padding: 0;
 }
 
-.card_f369db {
+.mainCard_BkGrJJ:not(.header_BkGrJJ) {
 	@include controls.card-in-container(
-		$activatable: true,
-		$first-selector: ":first-of-type",
-		$last-selector: ":last-of-type"
+		$activatable-selector: "&",
+		$first-selector: ".card_BkGrJJ:first-of-type > &",
+		$last-selector: ".card_BkGrJJ:last-of-type > &"
 	);
 
-	// for now
+	// nitro theme
+	background-image: none;
 	box-shadow: var(--elevation-medium);
+}
 
-	.mainCard_f369db {
-		background-color: transparent;
-		border: none;
-		padding: 0;
+.pill_snX-u4 {
+	@include controls.tag;
+
+	border: none;
+	height: unset;
+
+	&.clickable_snX-u4:hover {
+		background-color: color-mix(in srgb, currentColor 15%, transparent);
+	}
+
+	&.clickable_snX-u4:active {
+		background-color: color-mix(in srgb, currentColor 30%, transparent);
+	}
+
+	&.selected_snX-u4 {
+		color: var(--accent-color);
+	}
+
+	& > div {
+		@extend %text-normal;
 	}
 }
 
-.header_f369db {
-	background: none;
-	border: none;
+.tagList_owUmX8 {
+	height: 30px;
 }
 
-.tagsContainer_f369db {
+.tagListInner_BkGrJJ {
+	gap: var(--spacing);
+}
+
+// legacy button content
+.sortDropdownText_BkGrJJ,
+.tagsButtonInner_BkGrJJ {
+	margin: 0;
 	padding: 0;
 }
 
-.titleContainer_d9be46 {
+.tagsContainer_BkGrJJ {
+	padding: 0;
+}
+
+.titleContainer_owUmX8 {
 	gap: var(--spacing-2x);
 }
 
-.prefixElement_d9be46 {
+.prefixElement_owUmX8 {
 	display: none;
 }

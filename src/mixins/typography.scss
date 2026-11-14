@@ -3,9 +3,14 @@
 // https://github.com/GNOME/libadwaita/blob/main/src/stylesheet/widgets/_links.scss
 
 %caption {
-	color: var(--window_fg_muted);
+	color: var(--window-fg-muted);
+	font-size: 0.82rem;
 	font-weight: 400;
-	font-size: calc(15px * 0.82);
+}
+
+%heading {
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 %link {
@@ -22,21 +27,21 @@
 }
 
 %title-1 {
+	font-size: 1.81rem;
 	font-weight: 800;
-	font-size: calc(11px * 1.81);
 }
 
 %title-2 {
+	font-size: 1.36rem;
 	font-weight: 800;
-	font-size: calc(11px * 1.36);
 }
 
 %title-3 {
+	font-size: 1.36rem;
 	font-weight: 700;
-	font-size: calc(11px * 1.36);
 }
 
 %title-4 {
+	font-size: 1.18rem;
 	font-weight: 700;
-	font-size: calc(11px * 1.18);
 }

@@ -1,0 +1,58 @@
+@use "controls";
+@use "dialog";
+@use "typography";
+
+.header_6bgemo {
+	@include dialog.header;
+}
+
+.messagesPopout_6bgemo {
+	padding: 0;
+
+	[role="list"] {
+		@include controls.cards-container;
+
+		margin: 22px 28px;
+		overflow: hidden;
+
+		& > div {
+			border: none;
+			margin: 0;
+			padding: 0;
+
+			&:not(:last-child) {
+				border-block-end: 1px solid var(--card-shade-color);
+				border-radius: 0;
+			}
+		}
+	}
+
+	.actionButtons_6bgemo {
+		inset-block-start: 8px;
+		inset-inline-end: 8px;
+	}
+
+	.messageContainer__95796 {
+		background-color: transparent;
+		border: none;
+		margin: 0;
+		padding: 8px 0;
+	}
+}
+
+.messagesPopoutWrap_6bgemo {
+	@include dialog.container;
+}
+
+.titleContainer_6bgemo {
+	height: var(--headerbar-height);
+	justify-content: center;
+
+	[data-text-variant="body-lg/semibold"] {
+		@extend %heading;
+	}
+
+	svg {
+		display: none;
+	}
+}

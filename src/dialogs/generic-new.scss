@@ -1,79 +1,121 @@
 @use "controls";
 @use "dialog";
+@use "typography";
 
+[role="alertdialog"],
 [role="dialog"] {
 	--dialog-spacing-x05: calc(var(--dialog-spacing) / 2);
 	--dialog-spacing: 24px;
 }
 
-.actionBar__8a031 {
-	box-shadow: none;
-	padding: 0;
+.actionBar_dvN-MP {
 	margin: var(--dialog-spacing);
-	margin-top: 0;
-	gap: var(--spacing-2x);
+	margin-block-start: 0;
+	padding: 0;
 
 	button {
-		// Hardcoded (maybe):
-		// https://gitlab.gnome.org/GNOME/libadwaita/-/blob/main/src/stylesheet/widgets/_message-dialog.scss#L123
 		border-radius: 12px;
-		// Seen in "Change password" dialog
-		margin: 0;
-
 		flex-grow: 1;
 		height: 44px;
 	}
 }
 
-.bodyInner__8a031 {
-	text-align: center;
+.actionBarTrailing_dvN-MP {
+	& > div {
+		gap: var(--spacing-2x);
+	}
+}
+
+.bodyControls_dvN-MP {
+	padding: var(--dialog-spacing-x05) var(--dialog-spacing);
+
+	&::after {
+		background: none;
+		box-shadow: var(--elevation-low);
+		height: 1px;
+		inset-inline: 0;
+		margin-block-start: -1px;
+		transition: none;
+	}
+}
+
+.bodyInner_dvN-MP {
 	padding: var(--dialog-spacing);
-	padding-top: var(--dialog-spacing-x05);
+	padding-inline-end: calc(var(--dialog-spacing) - 16px);
+	text-align: center;
 }
 
 // ???
-.bodySpacerBottom__8a031,
-.bodySpacerTop__8a031 {
+.bodySpacerBottom_dvN-MP,
+.bodySpacerTop_dvN-MP {
 	display: none;
 }
 
-.container__8a031 {
+.bodySpacerBottom_dvN-MP.bodyScrollingSpacerBottom_dvN-MP {
+	border: none;
+	display: block;
+	height: 1px;
+	margin-block-end: -1px;
+	padding-block-end: var(--dialog-spacing);
+	position: relative;
+
+	&.showFade_dvN-MP::before {
+		// --elevation-low
+		box-shadow:
+			0 -1px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent),
+			0 -2px 4px
+				color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent);
+		content: "";
+		inset: 0;
+		position: absolute;
+	}
+}
+
+.container_dvN-MP {
+	--custom-modal-padding-block-start: var(--dialog-spacing);
+
 	@include dialog.container;
 
 	border: none;
 	padding: 0;
 
-	&:has(.headerTrailing__8a031 > [aria-label="Close"]) {
-		background-color: var(--window_bg_color);
+	&:has(.headerTrailing_dvN-MP > [aria-label="Close"]) {
+		background-color: var(--window-bg-color);
 	}
 }
 
-.header__8a031 {
-	padding: 0;
-	padding-top: var(--dialog-spacing);
+.header_dvN-MP {
+	padding: var(--dialog-spacing);
+	padding-block-end: 0;
 
-	& > .stack_dbd263 {
+	& > .stack_TWWX0S {
+		gap: var(--dialog-spacing-x05);
 		text-align: center;
 	}
 }
 
-.headerTrailing__8a031 {
-	margin: 0;
-
-	position: absolute;
-	top: var(--titlebar-button-spacing);
-	right: var(--titlebar-button-spacing);
-
-	.button_a22cb0.icon-only_a22cb0 {
-		@include controls.titlebar-button;
+.headerGradient_dvN-MP {
+	&::before {
+		inset-block-start: 0;
 	}
 }
 
-.scrim__40128 {
-	background-color: var(--backdrop);
-	border-radius: var(--window_radius);
+.headerSubtitleWrapper_dvN-MP {
+	justify-content: center;
+}
 
-	&.lightbox__40128 {
-		background-color: rgba(0, 0, 0, 0.75);
+.headerTitle_dvN-MP {
+	@extend %title-2;
+}
+
+.headerTrailing_dvN-MP {
+	inset-block-start: var(--titlebar-button-spacing);
+	inset-inline-end: var(--titlebar-button-spacing);
+	margin: 0;
+	position: absolute;
+	z-index: 0;
+
+	.button_F7qvhY.icon-only_F7qvhY {
+		@include controls.titlebar-button;
 	}
 }

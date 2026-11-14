@@ -1,0 +1,60 @@
+@use "controls";
+
+.button_2x8-Qn {
+	@include controls.icon-button;
+}
+
+.buttonContainer_2x8-Qn > :where(button, div) {
+	margin-inline-start: var(--spacing);
+}
+
+.buttons_2x8-Qn {
+	gap: 0;
+
+	// align to start for longer text
+	& > div {
+		align-items: start;
+		height: 100%;
+	}
+}
+
+.channelTextArea_2x8-Qn {
+	--custom-channel-textarea-text-area-height: 34px;
+
+	background: transparent;
+	border: none;
+
+	.editor_SHcSVi {
+		@include controls.text-field;
+
+		.custom-theme-background & {
+			background: var(--background-gradient-highest);
+		}
+
+		&[contenteditable="false"] {
+			@include controls.text-field-disabled;
+		}
+	}
+
+	.placeholder_SHcSVi {
+		inset: 8px 9px;
+		line-height: 1.25;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+	}
+}
+
+.inner_2x8-Qn {
+	padding: 0;
+}
+
+.textArea_2x8-Qn:not(.textAreaSlate_2x8-Qn) {
+	@include controls.text-field;
+
+	line-height: 1.25;
+}
+
+.themedBackground_2x8-Qn {
+	background: transparent;
+}

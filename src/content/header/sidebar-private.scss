@@ -1,19 +1,18 @@
 @use "controls";
 @use "typography";
 
-.privateChannels_e6b769 {
+.privateChannels_u88IQl {
 	&::before {
-		content: attr(aria-label);
+		@extend %heading;
 
-		position: absolute;
-		inset-inline: 0;
-		height: var(--headerbar-height);
-		display: flex;
 		align-items: center;
+		color: var(--headerbar-fg-color);
+		content: attr(aria-label);
+		display: flex;
+		height: var(--headerbar-height);
+		inset-inline: 0;
 		justify-content: center;
-
-		@extend %title-3;
-		color: var(--headerbar_fg_color);
+		position: absolute;
 	}
 
 	[role="listitem"] {
@@ -22,31 +21,27 @@
 	}
 }
 
-.privateChannelsHeaderContainer__99e7c {
+.privateChannelsHeaderContainer_Bce46W {
 	display: none;
 }
 
-.searchBar_e6b769 {
+.searchBar_u88IQl {
 	border: none;
 	box-shadow: var(--elevation-low);
-	padding: var(--spacing);
-
 	height: var(--headerbar-height);
-
-	app-region: drag;
+	padding: var(--spacing);
+	-webkit-app-region: drag;
 
 	& > button {
 		@include controls.icon-button-with-tooltip(
 			$name: "loupe-large",
-			$direction: bottom,
-			$overflow-workaround-direction: "left"
+			$direction: "block-end",
+			$overflow-workaround-direction: "inline-start"
 		);
 
-		color: var(--headerbar_fg_color);
-
+		color: var(--headerbar-fg-color);
 		// undo fullWidth for mana button
 		flex: unset;
-
-		app-region: no-drag;
+		-webkit-app-region: no-drag;
 	}
 }

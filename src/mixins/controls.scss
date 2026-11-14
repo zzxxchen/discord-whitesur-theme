@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:math";
 @use "sass:string";
 @use "util";
 
@@ -20,19 +23,10 @@ $toast_fg_color: white;
 	background-color: color-mix(
 		in srgb,
 		var(--banner-color) 30%,
-		var(--window_bg_color)
+		var(--window-bg-color)
 	);
-	color: var(--window_fg_color);
+	color: var(--window-fg-color);
 	padding: var(--spacing);
-
-	* {
-		font-size: inherit;
-		font-weight: inherit;
-	}
-
-	svg {
-		display: none;
-	}
 }
 
 @mixin tooltip {
@@ -50,16 +44,16 @@ $toast_fg_color: white;
 	@include -bold-font;
 	@include button-basic-raised;
 
-	color: var(--window_fg_color);
-	padding: 5px 10px;
+	color: var(--window-fg-color);
 	border: none;
 	border-radius: var(--button_radius);
-
-	min-width: 16px;
-	min-height: 24px;
 	height: 34px;
+	min-height: 24px;
+	min-width: 16px;
+	padding: 5px 10px;
 
 	* {
+		color: inherit;
 		font: inherit;
 	}
 
@@ -70,7 +64,7 @@ $toast_fg_color: white;
 
 @mixin button-accent {
 	background-color: var(--accent-bg-color);
-	color: var(--accent_fg_color);
+	color: var(--accent-fg-color);
 
 	&:hover {
 		background-color: color-mix(
@@ -89,29 +83,32 @@ $toast_fg_color: white;
 	}
 }
 
-@mixin button-basic-raised($hover: ":hover", $active: ":active") {
+@mixin button-basic-raised($hover: "&:hover", $active: "&:active") {
 	background-color: color-mix(in srgb, currentColor 10%, transparent);
-
 	transition: var(--button_transition);
 
-	&#{$hover} {
+	#{$hover} {
 		background-color: color-mix(in srgb, currentColor 15%, transparent);
 	}
 
-	&#{$active} {
+	#{$active} {
 		background-color: color-mix(in srgb, currentColor 30%, transparent);
 	}
 }
 
+@mixin button-disabled {
+	opacity: var(--dim-level-opacity);
+}
+
 @mixin button-selected {
-	background-color: var(--selected_color);
+	background-color: var(--selected-color);
 
 	&:hover {
-		background-color: var(--selected_hover_color);
+		background-color: var(--selected-hover-color);
 	}
 
 	&:active {
-		background-color: var(--selected_active_color);
+		background-color: var(--selected-active-color);
 	}
 }
 
@@ -128,26 +125,19 @@ $toast_fg_color: white;
 	background-color: transparent;
 	border: none;
 	border-radius: var(--button_radius);
+	height: var(--icon-button-size);
 	padding: 0;
-
 	position: relative;
 	width: var(--icon-button-size);
-	height: var(--icon-button-size);
-
-	&:disabled {
-		opacity: var(--dim-level-opacity);
-		background-color: transparent;
-	}
 
 	&::before {
-		content: "";
-
 		@include util.icon;
 
-		position: absolute;
-		inset: 0;
-		width: 100%;
+		content: "";
 		height: 100%;
+		inset: 0;
+		position: absolute;
+		width: 100%;
 	}
 
 	& > * {
@@ -159,8 +149,8 @@ $toast_fg_color: white;
 	@include icon-button($name);
 
 	background-color: rgb(0 0 0 / 65%);
-	color: white;
 	border-radius: 999px;
+	color: white;
 
 	&:hover {
 		background-color: color-mix(
@@ -190,9 +180,12 @@ $toast_fg_color: white;
 
 	$id: --tooltip-#{string.unique-id()};
 	$tooltip-h: 30px;
-	$is-pseudo: $selector == "::after";
-	$is-horizontal: $direction == "left" or $direction == "right";
-	$direction-opposite: util.get-opposite-dir($direction);
+	$is-pseudo: util.ends-with($selector, "::after");
+
+	$split: string.split($direction, "-");
+	$split-lhs: list.nth($split, 1);
+	$split-rhs: list.nth($split, 2);
+	$direction-opposite: $split-lhs == "start" and "end" or "start";
 
 	anchor-name: $id;
 
@@ -200,27 +193,33 @@ $toast_fg_color: white;
 		@include tooltip;
 		@extend %text-normal;
 
+		display: block;
+		inset-#{$split-lhs}-#{$direction-opposite}: calc(
+			anchor(#{$split-rhs}) + var(--spacing)
+		);
+		pointer-events: none;
+		position: fixed;
+		position-anchor: $id;
+		z-index: 999;
+
 		@if $is-pseudo {
 			content: attr(aria-label);
 		}
 
-		display: block;
-		position: fixed;
-		position-anchor: $id;
-		#{$direction-opposite}: calc(anchor(#{$direction}) + var(--spacing));
-		z-index: 999;
-
-		@if $is-horizontal {
-			top: calc(anchor(top) + (var(--icon-button-size) - #{$tooltip-h}) / 2);
-		}
-
 		// Make the tooltip appear not centered, since it's prevented by various
 		// "overflow: hidden" rules, and it's too risky reverting all of them
-		#{$overflow-workaround-direction}: anchor(
-			#{$overflow-workaround-direction}
-		);
+		@if $overflow-workaround-direction {
+			$owd-split: string.split($overflow-workaround-direction, "-");
+			$owd-split-rhs: list.nth($owd-split, 2);
 
-		pointer-events: none;
+			inset-#{$overflow-workaround-direction}: anchor(#{$owd-split-rhs});
+		}
+
+		@if $split-rhs == "inline" {
+			inset-block-start: calc(
+				anchor(start) + (var(--icon-button-size) - #{$tooltip-h}) / 2
+			);
+		}
 	}
 }
 
@@ -232,9 +231,17 @@ $toast_fg_color: white;
 
 @mixin osd-like-button-group {
 	background-color: $osd_bg_color;
-	color: $osd_fg_color;
 	border-radius: 999px;
+	color: $osd_fg_color;
 	padding: $osd-like-padding;
+}
+
+@mixin osd-like-separator {
+	$-alpha: math.div(color.channel($osd_bg_color, "alpha"), 2) * 100%;
+
+	background-color: color-mix(in srgb, currentColor #{$-alpha}, transparent);
+	height: calc(100% - var(--spacing-2x) + #{$osd-like-padding} * 2);
+	margin: 0 var(--spacing);
 }
 
 @mixin titlebar-button {
@@ -253,25 +260,24 @@ $toast_fg_color: white;
 
 	#{$item} {
 		@include card-in-container(
-			$activatable: true,
-			$first-selector: ":first-child",
-			$last-selector: ":last-child"
+			$activatable-selector: "&",
+			$first-selector: "&:first-child",
+			$last-selector: "&:last-child"
 		);
 
 		box-shadow: none;
 		gap: 16px;
-		padding: 16px;
 		margin: 0;
+		padding: 16px;
 	}
 
 	#{$icon} {
 		border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
 		border-radius: 50%;
-
 		// Needed for settings
 		flex-shrink: 0;
-		width: 22px;
 		height: 22px;
+		width: 22px;
 
 		#{$selected} & {
 			background-color: #fff;
@@ -287,9 +293,8 @@ $toast_fg_color: white;
 @mixin slider($bar, $bar-fill, $grabber) {
 	#{$bar} {
 		border-radius: 16px;
-
-		top: 0;
 		height: 4px;
+		inset-block-start: 0;
 	}
 
 	#{$bar-fill} {
@@ -303,23 +308,21 @@ $toast_fg_color: white;
 		box-shadow:
 			0 0 0 1px rgba(0, 0, 6, 0.1),
 			0 2px 4px rgba(0, 0, 6, 0.2);
-		margin: 0;
-		margin-left: -10px;
-
-		top: -8px;
-		width: 20px;
 		height: 20px;
+		inset-block-start: -8px;
+		margin: 0;
+		margin-inline-start: -10px;
+		width: 20px;
 	}
 }
 
 @mixin split-button($lhs, $rhs) {
 	border-radius: var(--button_radius);
-
 	transition: var(--button_transition);
 
 	&:hover,
 	&:active {
-		background-color: var(--hover_color);
+		background-color: var(--hover-color);
 
 		#{$lhs}::after {
 			background-color: transparent;
@@ -335,26 +338,22 @@ $toast_fg_color: white;
 
 	#{$lhs} {
 		&::after {
-			content: "";
-
-			position: absolute;
-			inset-inline-end: -1px;
-			inset-block: var(--spacing);
-			width: 1px;
-			height: calc(100% - var(--spacing-2x));
-
-			opacity: var(--dim-level-opacity);
 			background-color: currentColor;
+			content: "";
+			height: calc(100% - var(--spacing-2x));
+			inset-block: var(--spacing);
+			inset-inline-end: -1px;
+			opacity: var(--dim-level-opacity);
+			position: absolute;
 			transition: var(--button_transition);
+			width: 1px;
 		}
 	}
 
 	#{$rhs} {
 		--icon: icon("pan-down");
 
-		padding-left: 5px;
-		padding-right: 5px;
-
+		padding-inline: 5px;
 		width: 24px;
 	}
 }
@@ -366,27 +365,23 @@ $toast_fg_color: white;
 
 	background-color: color-mix(
 		in srgb,
-		var(--window_fg_color) var(--percentage),
+		var(--window-fg-color) var(--percentage),
 		transparent
 	);
 	border: none;
-	padding: var(--spacing);
-
-	width: calc(var(--swatch-size) * 2 + var(--spacing) * 2);
 	height: calc(var(--swatch-size) + var(--spacing) * 2);
+	padding: var(--spacing);
+	width: calc(var(--swatch-size) * 2 + var(--spacing) * 2);
 
 	&::before {
-		content: "";
-
-		display: block;
-		width: var(--swatch-size);
-		height: var(--swatch-size);
-
 		background-color: #fff;
 		border-radius: 14px;
 		box-shadow: 0 2px 4px color-mix(in srgb, black 20%, transparent);
-
+		content: "";
+		display: block;
+		height: var(--swatch-size);
 		transition: var(--switch-transition);
+		width: var(--swatch-size);
 	}
 
 	&:hover {
@@ -397,11 +392,11 @@ $toast_fg_color: white;
 		--percentage: 8%;
 	}
 
-	&#{$checked} {
+	#{$checked} {
 		background-color: var(--accent-bg-color);
 
 		&::before {
-			margin-left: var(--swatch-size);
+			margin-inline-start: var(--swatch-size);
 			transition: var(--switch-transition);
 		}
 
@@ -414,9 +409,41 @@ $toast_fg_color: white;
 		}
 	}
 
-	&#{$disabled} {
+	#{$disabled} {
 		opacity: var(--disabled-opacity);
 	}
+}
+
+@mixin tab($selected-sel) {
+	@include button;
+
+	background-color: transparent;
+	font-weight: bold;
+	line-height: 1;
+	padding-block: 10px;
+
+	#{$selected-sel} {
+		@include button-selected;
+	}
+}
+
+@mixin tab-vertical($selected-sel) {
+	@include button;
+
+	background-color: transparent;
+	font-weight: normal;
+	height: 36px;
+	padding: 10px 14px;
+
+	#{$selected-sel} {
+		@include button-selected;
+	}
+}
+
+@mixin tag {
+	background: color-mix(in srgb, currentColor 10%, transparent);
+	border-radius: 999px;
+	padding: var(--spacing) var(--spacing-2x);
 }
 
 @mixin text-field {
@@ -425,35 +452,31 @@ $toast_fg_color: white;
 	background-color: color-mix(
 		in srgb,
 		currentColor 10%,
-		var(--window_bg_color)
+		var(--window-bg-color)
 	);
-	font-size: var(--document-font-size);
-	line-height: 1.2;
 	border: none;
 	border-radius: var(--button_radius);
-	padding: 8px 9px;
-	margin: 0;
-
+	font-size: var(--document-font-size);
 	height: unset;
+	line-height: 1.2;
+	margin: 0;
+	padding: 8px 9px;
+}
 
-	&:disabled {
-		opacity: var(--dim-level-opacity);
-	}
-
-	// TODO: maybe remove and --input-placeholder-text: var(--text-muted)
-	&::placeholder {
-		color: var(--text-muted);
-		font-size: inherit;
-		font-weight: inherit;
-	}
+@mixin text-field-disabled {
+	opacity: var(--dim-level-opacity);
 }
 
 @mixin toast {
 	background: $toast_bg_color;
-	color: $toast_fg_color;
+	border-radius: 150px;
 	box-shadow:
 		0 1px 3px 1px rgb(0 0 6 / 7%),
 		0 2px 6px 2px rgb(0 0 6 / 3%);
+	color: $toast_fg_color;
+	margin: var(--spacing-2x);
+	margin-block-end: calc(var(--spacing-2x) * 2);
+	padding: var(--spacing);
 
 	--standalone-color-oklab: max(l, 0.85) a b;
 
@@ -472,12 +495,6 @@ $toast_fg_color: white;
 	--error-color: oklab(
 		from var(--error-bg-color) var(--standalone-color-oklab)
 	);
-
-	margin: var(--spacing-2x);
-	margin-bottom: calc(var(--spacing-2x) * 2);
-
-	border-radius: 150px;
-	padding: var(--spacing);
 }
 
 @mixin toggle-group {
@@ -488,34 +505,33 @@ $toast_fg_color: white;
 	padding: var(---group-padding);
 }
 
+/// The $checked param is relative to `&` because of the last selector.
 @mixin toggle-group-toggle($checked) {
-	transition: var(--toggle_transition);
-	border-radius: calc(var(--button_radius) - var(---group-padding));
-	font-weight: bold;
-	padding-left: calc(11px - var(---group-padding));
-	padding-right: calc(11px - var(---group-padding));
-
-	display: flex;
 	align-items: center;
+	border-radius: calc(var(--button_radius) - var(---group-padding));
+	display: flex;
+	font-weight: bold;
 	justify-content: center;
-	position: relative;
-	min-width: 34px;
 	min-height: calc(34px - var(---group-padding) * 2);
+	min-width: 34px;
+	padding-inline: calc(11px - var(---group-padding));
+	position: relative;
+	transition: var(--toggle_transition);
 
 	&:hover {
-		background-color: var(--hover_color);
+		background-color: var(--hover-color);
 	}
 
 	&:active {
-		background-color: var(--active_color);
+		background-color: var(--active-color);
 	}
 
 	&#{$checked} {
 		background-color: var(--active-toggle-bg-color);
-		color: var(--active-toggle-fg-color);
 		box-shadow:
 			0 1px 3px 1px rgb(0 0 6 / 7%),
 			0 2px 6px 2px rgb(0 0 6 / 3%);
+		color: var(--active-toggle-fg-color);
 
 		&:disabled {
 			background-color: color-mix(
@@ -531,21 +547,19 @@ $toast_fg_color: white;
 		---separator-opacity: 1;
 		---separator-width: 1px;
 
-		margin-right: var(---group-padding);
+		margin-inline-end: var(---group-padding);
 
 		&::after {
-			content: "";
-
-			position: absolute;
-			right: calc(var(---group-padding) * -1);
-			width: var(---separator-width);
-			height: 100%;
-
 			// TODO: dedi file
 			$border_color: color-mix(in srgb, currentColor 25%, transparent);
-			opacity: var(---separator-opacity);
 			background-color: $border_color;
+			content: "";
+			height: 100%;
+			inset-inline-end: calc(var(---group-padding) * -1);
 			margin: var(---group-padding) var(---separator-width);
+			opacity: var(---separator-opacity);
+			position: absolute;
+			width: var(---separator-width);
 		}
 
 		@media not (prefers-reduced-motion) {
@@ -566,32 +580,32 @@ $toast_fg_color: white;
 	box-shadow: var(--elevation-medium);
 }
 
-@mixin card($activatable: false) {
-	background-color: var(--card_bg_color);
-	color: var(--card_fg_color);
+/// @param {string} $activatable-selector
+@mixin card($activatable-selector: "") {
+	background-color: var(--card-bg-color);
 	border: none;
 	border-radius: var(--card_radius);
 	box-shadow: var(--elevation-medium);
+	color: var(--card-fg-color);
+	min-height: calc(var(--icon-button-size) + 10px * 2);
 	padding: 10px 16px;
 
-	min-height: calc(var(--icon-button-size) + 10px * 2);
-
-	@if $activatable {
+	@if $activatable-selector != "" {
 		transition: var(--backdrop_transition);
 
-		&:hover {
+		#{$activatable-selector}:hover {
 			background-color: color-mix(
 				in srgb,
 				currentColor 3%,
-				var(--card_bg_color)
+				var(--card-bg-color)
 			);
 		}
 
-		&:active {
+		#{$activatable-selector}:active {
 			background-color: color-mix(
 				in srgb,
 				currentColor 8%,
-				var(--card_bg_color)
+				var(--card-bg-color)
 			);
 		}
 	}
@@ -605,66 +619,70 @@ $toast_fg_color: white;
 	&::before,
 	&::after {
 		content: "";
-
-		position: absolute;
 		// horizontal card padding
-		right: 16px;
+		inset-inline-end: 16px;
+		position: absolute;
 	}
 
 	&::before {
-		transition: var(--button_transition);
 		border-radius: var(--button_radius);
-
-		width: var(--icon-button-size);
 		height: var(--icon-button-size);
+		transition: var(--button_transition);
+		width: var(--icon-button-size);
 	}
 
 	&:hover::before {
-		background-color: var(--selected_hover_color);
+		background-color: var(--selected-hover-color);
 	}
 
 	&:active::before {
-		background-color: var(--selected_active_color);
+		background-color: var(--selected-active-color);
 	}
 
 	&::after {
-		display: block;
-
 		@include util.icon;
 
+		display: block;
 		margin: calc(var(--spacing) * 1.5);
 	}
 }
 
 /// Children of a `cards-container`.
 ///
-/// @param {boolean} $activatable
+/// @param {string} $activatable-selector
 /// @param {string} $first-selector
 /// @param {string} $last-selector
-@mixin card-in-container($activatable: false, $first-selector, $last-selector) {
-	@include card($activatable);
+@mixin card-in-container(
+	$activatable-selector: false,
+	$first-selector,
+	$last-selector
+) {
+	@include card($activatable-selector);
 
-	border-bottom: 1px solid var(--card_shade_color);
+	border-block-end: 1px solid var(--card-shade-color);
 	border-radius: 0;
 	box-shadow: none;
 
-	&#{$first-selector} {
+	#{$first-selector} {
 		border-radius: var(--card_radius) var(--card_radius) 0 0;
 	}
 
-	&#{$last-selector} {
+	#{$last-selector} {
 		border-radius: 0 0 var(--card_radius) var(--card_radius);
 		border: none;
 	}
 
-	@if $first-selector == ":first-of-type" and $last-selector == ":last-of-type"
+	@if $first-selector ==
+		"&:first-of-type" and
+		$last-selector ==
+		"&:last-of-type"
 	{
 		&:only-of-type {
 			border-radius: var(--card_radius);
 		}
 	}
 
-	@if $first-selector == ":first-child" and $last-selector == ":last-child" {
+	@if $first-selector == "&:first-child" and $last-selector == "&:last-child" {
 		&:only-child {
 			border-radius: var(--card_radius);
 		}

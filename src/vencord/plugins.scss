@@ -11,13 +11,12 @@
 		$name: "check-plain",
 		$selector: "&:hover::after",
 		$size: var(--guildbar-avatar-size),
-		$direction: "right"
+		$direction: "inline-end"
 	);
 
-	font-size: 0;
 	border-radius: 50%;
+	font-size: 0;
 	margin: auto;
-
 	min-height: var(--guildbar-avatar-size);
 
 	&::after {
@@ -27,7 +26,7 @@
 
 // VencordToolbox
 .vc-toolbox-btn {
-	--window_fg_color: transparent;
+	--window-fg-color: transparent;
 
 	svg {
 		display: initial;

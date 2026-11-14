@@ -1,0 +1,20 @@
+@use "controls";
+
+.button_Z0MHyc {
+	@include controls.osd-like-button;
+
+	&.dangerous_Z0MHyc {
+		color: var(--destructive-color);
+	}
+}
+
+.separator_Z0MHyc {
+	@include controls.osd-like-separator;
+}
+
+.wrapper_Z0MHyc {
+	@include controls.osd-like-button-group;
+
+	box-shadow: none;
+	height: unset;
+}

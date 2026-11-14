@@ -1,5 +1,15 @@
 // scss is horrible
 
+@use "common/channel-text-area";
+@use "common/field";
+@use "common/message";
+@use "common/pagination";
+@use "common/popover-actions";
+@use "common/popover-messages";
+@use "common/search";
+@use "common/unsorted";
+@use "common/user-profile";
+
 @use "global/icons" as *;
 @use "global/scrollbar" as *;
 @use "global/text" as *;
@@ -10,8 +20,6 @@
 @use "global/variables/libadwaita-other" as *;
 @use "global/variables/options" as *;
 @use "global/variables/window-decorations" as *;
-
-@use "components/channel-text-area" as *;
 
 @use "controls/banners/app" as *;
 @use "controls/banners/chat" as *;
@@ -47,7 +55,6 @@
 @use "dialogs/generic-new" as *;
 @use "dialogs/image-carousel" as *;
 @use "dialogs/quick-switcher" as *;
-@use "dialogs/shared-messages" as *;
 @use "dialogs/user-profile" as *;
 @use "dialogs/settings/content" as *;
 @use "dialogs/settings/server" as *;
@@ -63,6 +70,7 @@
 @use "popovers/search" as *;
 @use "popovers/threads" as *;
 @use "popovers/tooltips" as *;
+@use "popovers/user-panel" as *;
 @use "popovers/user-profile" as *;
 @use "popovers/vc-stream" as *;
 
@@ -75,11 +83,13 @@
 @use "vencord/modals/ui-elements" as *;
 
 // ===== Dialog close buttons - WhiteSur traffic light override =====
-// Must be at end of index.scss so it overrides dialog SCSS in cascade
-.closeButton_c2b141,
-.close__49fc1,
-.headerTrailing__8a031 .button_a22cb0.icon-only_a22cb0,
-.modalHeaderButtons__9c3be > button,
+// Must be at end of index.scss so it overrides dialog SCSS in cascade.
+// Colored traffic-light dots replace the stock mask icons.
+.close__KoJTP,
+.closeButton_e76OBR,
+.closeButton_QGyCSa,
+.closeCircleButton_sLUoDH,
+.headerTrailing_dvN-MP .button_F7qvhY.icon-only_F7qvhY,
 button[aria-label="Close"] {
 	width: 16px !important;
 	height: 16px !important;
@@ -107,7 +117,7 @@ button[aria-label="Close"] {
 
 	&:hover {
 		background-color: transparent !important;
-		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIHRyYW5zZm9ybT0ibWF0cml4KDMuNzc5NSAwIDAgMy43Nzk1IC0zMjIgLTU4MC41OCkiPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KC4zNDAxOCAwIDAgLjM0MDE4IDg0LjkzMSAxNTMuMzMpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiPgogICAgPGcgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICA8cGF0aCBkPSJtMTIuMDAzIDEwNDUuOWMzLjAwNjggMCA1LjQ0NDQtMi40Mzc2IDUuNDQ0NC01LjQ0NDVzLTIuNDM3Ni01LjQ0NDQtNS40NDQ0LTUuNDQ0NGMtMy4wMDY5IDAtNS40NDQ1IDIuNDM3NS01LjQ0NDUgNS40NDQ0czIuNDM3NiA1LjQ0NDUgNS40NDQ1IDUuNDQ0NSIgZmlsbD0iI2NiNGU0MyIgc3Ryb2tlLXdpZHRoPSIuNzc3NzgiLz4KICAgICA8cGF0aCBkPSJtMTIuMDAzIDEwNDUuNWMyLjc5MiAwIDUuMDU1NS0yLjI2MzUgNS4wNTU1LTUuMDU1NiAwLTIuNzkyMi0yLjI2MzUtNS4wNTU3LTUuMDU1NS01LjA1NTctMi43OTIyIDAtNS4wNTU2IDIuMjYzNS01LjA1NTYgNS4wNTU3IDAgMi43OTIxIDIuMjYzNSA1LjA1NTYgNS4wNTU2IDUuMDU1NiIgZmlsbD0iI2ZlNjI1NCIgc3Ryb2tlLXdpZHRoPSIuNzY0NzEiLz4KICAgIDwvZz4KICAgPC9nPgogIDwvZz4KICA8cGF0aCBkPSJtODYuNTY0IDE1NC45NmMtMC4xMDM2NSAwLjEwMzY0LTAuMTAzNjUgMC4yNzA1MSAwIDAuMzc0MTdsMC4zNzQxNyAwLjM3NDE4LTAuMzc0MTcgMC4zNzQxN2MtMC4xMDM2NSAwLjEwMzY2LTAuMTAzNjUgMC4yNzA1NCAwIDAuMzc0MTcgMC4xMDM2NCAwLjEwMzY3IDAuMjcwNTMgMC4xMDM2NyAwLjM3NDE3IDBsMC4zNzQxOC0wLjM3NDE3IDAuMzc0MTggMC4zNzQxN2MwLjEwMzY0IDAuMTAzNjcgMC4yNzA1MyAwLjEwMzY3IDAuMzc0MTcgMCAwLjEwMzY1LTAuMTAzNjMgMC4xMDM2NS0wLjI3MDUxIDAtMC4zNzQxN2wtMC4zNzQxNy0wLjM3NDE3IDAuMzc0MTctMC4zNzQxOGMwLjEwMzY1LTAuMTAzNjYgMC4xMDM2NS0wLjI3MDUzIDAtMC4zNzQxNy0wLjEwMzY0LTAuMTAzNjctMC4yNzA1My0wLjEwMzY3LTAuMzc0MTcgMGwtMC4zNzQxOCAwLjM3NDE3LTAuMzc0MTgtMC4zNzQxN2MtMC4xMDM2NC0wLjEwMzY3LTAuMjcwNTMtMC4xMDM2Ny0wLjM3NDE3IDB6IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IiBvcGFjaXR5PSIuNSIvPgogPC9nPgo8L3N2Zz4K") !important;
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIHRyYW5zZm9ybT0ibWF0cml4KDMuNzc5NSAwIDAgMy43Nzk1IC0zMjIgLTU4MC41OCkiPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KC4zNDEwOCAwIDAgLjM0MDE4IDg0LjkzMSAxNTMuMzMpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiPgogICAgPGcgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICA8cGF0aCBkPSJtMTIuMDAzIDEwNDUuOWMzLjAwNjggMCA1LjQ0NDQtMi40Mzc2IDUuNDQ0NC01LjQ0NDVzLTIuNDM3Ni01LjQ0NDQtNS40NDQ0LTUuNDQ0NGMtMy4wMDY5IDAtNS40NDQ1IDIuNDM3NS01LjQ0NDUgNS40NDQ0czIuNDM3NiA1LjQ0NDUgNS40NDQ1IDUuNDQ0NSIgZmlsbD0iI2NiNGU0MyIgc3Ryb2tlLXdpZHRoPSIuNzc3NzgiLz4KICAgICA8cGF0aCBkPSJtMTIuMDAzIDEwNDUuNWMyLjc5MiAwIDUuMDU1NS0yLjI2MzUgNS4wNTU1LTUuMDU1NiAwLTIuNzkyMi0yLjI2MzUtNS4wNTU3LTUuMDU1NS01LjA1NTctMi43OTIyIDAtNS4wNTU2IDIuMjYzNS01LjA1NTYgNS4wNTU3IDAgMi43OTIxIDIuMjYzNSA1LjA1NTYgNS4wNTU2IDUuMDU1NiIgZmlsbD0iI2ZlNjI1NCIgc3Ryb2tlLXdpZHRoPSIuNzY0NzEiLz4KICAgIDwvZz4KICAgPC9nPgogIDwvZz4KICA8cGF0aCBkPSJtODYuNTY0IDE1NC45NmMtMC4xMDM2NSAwLjEwMzY0LTAuMTAzNjUgMC4yNzA1MSAwIDAuMzc0MTdsMC4zNzQxNyAwLjM3NDE4LTAuMzc0MTcgMC4zNzQxN2MtMC4xMDM2NSAwLjEwMzY2LTAuMTAzNjUgMC4yNzA1NCAwIDAuMzc0MTcgMC4xMDM2NCAwLjEwMzY3IDAuMjcwNTMgMC4xMDM2NyAwLjM3NDE3IDBsMC4zNzQxOC0wLjM3NDE3IDAuMzc0MTggMC4zNzQxN2MwLjEwMzY0IDAuMTAzNjcgMC4yNzA1MyAwLjEwMzY3IDAuMzc0MTcgMCAwLjEwMzY1LTAuMTAzNjMgMC4xMDM2NS0wLjI3MDUxIDAtMC4zNzQxN2wtMC4zNzQxNy0wLjM3NDE3IDAuMzc0MTctMC4zNzQxOGMwLjEwMzY1LTAuMTAzNjYgMC4xMDM2NS0wLjI3MDUzIDAtMC4zNzQxNy0wLjEwMzY0LTAuMTAzNjctMC4yNzA1My0wLjEwMzY3LTAuMzc0MTcgMGwtMC4zNzQxOCAwLjM3NDE3LTAuMzc0MTgtMC4zNzQxN2MtMC4xMDM2NC0wLjEwMzY3LTAuMjcwNTMtMC4xMDM2Ny0wLjM3NDE3IDB6IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IiBvcGFjaXR5PSIuNSIvPgogPC9nPgo8L3N2Zz4K") !important;
 	}
 
 	&:active {

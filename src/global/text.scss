@@ -2,12 +2,18 @@
 
 // Reference: _labels.scss
 
-html {
-	font-size: var(--document-font-size);
+html[style*="font-size: 100%"] {
+	// 16px -> 15px
+	font-size: 93.75%;
+}
+
+::placeholder {
+	color: var(--text-muted);
+	font: inherit;
 }
 
 ::selection {
-	background-color: color-mix(in srgb, var(--view_fg_color) 10%, transparent);
+	background-color: color-mix(in srgb, var(--view-fg-color) 10%, transparent);
 
 	.app-focused & {
 		background-color: color-mix(
@@ -20,46 +26,38 @@ html {
 
 [data-text-variant] {
 	line-height: 1.2;
-	text-transform: none;
 }
 
-.eyebrow__463b7:not(.numberBadge__463b7),
-.h1_b717a1,
-.h2_b717a1,
-.h3_b717a1,
-.h4_b717a1,
-.h5_b717a1 {
-	@extend %title-3;
+.eyebrow__463b7:not(.numberBadge_lMvXrQ) {
+	@extend %heading;
 
 	letter-spacing: 0;
-	margin-bottom: 16px;
+	margin-block-end: 16px;
 }
 
-[data-text-variant^="heading-lg"],
-[data-text-variant^="heading-x"] {
-	@extend %title-1;
-}
-
-[data-text-variant^="heading-md"] {
+:where([data-text-variant^="heading-lg"]),
+:where([data-text-variant^="heading-x"]) {
 	@extend %title-2;
 }
 
-[data-text-variant^="heading-deprecated-12"],
-[data-text-variant^="heading-sm"] {
-	@extend %title-4;
-}
-
-.description_ddd181,
-[data-text-variant^="text-sm"],
-[data-text-variant^="text-xs"] {
-	@extend %caption;
-}
-
-[data-text-variant^="text-md"] {
+:where([data-text-variant^="heading-md"]) {
 	@extend %title-3;
 }
 
-.anchor_edefb8 {
+:where([data-text-variant^="heading-sm"]) {
+	@extend %title-4;
+}
+
+:where([data-text-variant^="body-sm"]),
+:where([data-text-variant^="body-xs"]) {
+	@extend %caption;
+}
+
+:where([data-text-variant^="body-md"]) {
+	@extend %heading;
+}
+
+:where(.anchor_R6ReNl) {
 	@extend %link;
 
 	opacity: 1;

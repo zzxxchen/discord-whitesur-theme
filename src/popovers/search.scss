@@ -3,17 +3,16 @@
 @use "typography";
 @use "util";
 
-.clearSearchHistory__971b5 {
+.clearSearchHistory_lm2_KW {
 	@include controls.icon-button("user-trash", "32px");
 
 	border-radius: 999px;
-
+	inset-block-start: -4px;
+	inset-inline-end: 0;
 	position: absolute;
-	top: -4px;
-	right: 0;
 }
 
-.container__16eb0:not(:empty) {
+.container_cbVzxY:not(:empty) {
 	@include popover.container;
 
 	[data-text-variant] {
@@ -21,17 +20,17 @@
 	}
 
 	// "from: user", etc.
-	.filterSublabelTextContainer__971b5,
-	[data-text-variant="text-sm/medium"] + [data-text-variant="text-sm/medium"] {
+	.filterSublabelTextContainer_lm2_KW,
+	[data-text-variant="body-sm/medium"] + [data-text-variant="body-sm/medium"] {
 		display: none;
 	}
 }
 
-.divider__971b5 {
+.divider_lm2_KW {
 	margin: var(--menu_padding) 0;
 }
 
-.groupHeader__971b5 {
+.groupHeader_lm2_KW {
 	padding: 0;
 
 	& > [data-text-variant] {
@@ -39,55 +38,52 @@
 	}
 }
 
-.groupWrapper__971b5 {
+.groupWrapper_lm2_KW {
 	gap: 0;
-
 	position: relative;
 }
 
-.item__971b5 {
+.item_lm2_KW {
+	flex-grow: 1;
 	padding: 0;
 
-	flex-grow: 1;
-
-	& > div > [data-text-variant="text-sm/medium"]:first-child,
-	[data-text-variant="text-sm/semibold"] {
-		color: var(--popover_fg_color);
+	& > div > [data-text-variant="body-sm/medium"]:first-child,
+	[data-text-variant="body-sm/semibold"] {
+		color: var(--popover-fg-color);
 	}
 }
 
-.itemContainer__971b5 {
-	@include popover.entry($hover: ":is(:hover, [aria-selected='true'])");
+.itemContainer_lm2_KW {
+	@include popover.entry($hover: "&:is(:hover, [aria-selected='true'])");
 
-	display: flex;
 	align-items: center;
+	display: flex;
 }
 
-.itemIcon__971b5 {
-	color: var(--popover_fg_color);
+.itemIcon_lm2_KW {
+	color: var(--popover-fg-color);
 	margin-inline-end: var(--spacing);
 
 	// avatars don't work
 	&:where(svg) {
-		width: var(--icon-size);
 		height: var(--icon-size);
+		width: var(--icon-size);
 	}
 }
 
-.labelWithElements__971b5 {
-	gap: var(--spacing);
-
+.labelWithElements_lm2_KW {
 	flex-grow: 1;
+	gap: var(--spacing);
 
 	& > * {
 		overflow: hidden;
-		white-space: nowrap;
 		text-overflow: ellipsis;
+		white-space: nowrap;
 		width: 50%;
 	}
 
-	// revert [data-text-variant^="text-sm"]
+	// revert [data-text-variant^="body-sm"]
 	& > :first-child {
-		color: var(--popover_fg_color);
+		color: var(--popover-fg-color);
 	}
 }

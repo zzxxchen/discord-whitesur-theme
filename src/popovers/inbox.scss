@@ -1,12 +1,12 @@
 @use "controls";
 @use "dialog";
 
-.box_a86e6c {
+.box_0JZW4Z {
 	@include controls.card;
 
 	padding: 0;
 
-	.singleMessage_a86e6c {
+	.singleMessage_0JZW4Z {
 		// Probably enough to align it, didn't check lol
 		margin: 0 4px;
 		padding-block: calc(
@@ -15,45 +15,46 @@
 	}
 }
 
-.buttonGroup__996b5 {
+.buttonGroup_8ZcKCk {
 	gap: var(--spacing);
 }
 
-.channelHeader__996b5 {
-	border-block-end: 1px solid var(--card_shade_color);
+.channelHeader_8ZcKCk {
+	background: none;
+	border-block-end: 1px solid var(--card-shade-color);
 	gap: var(--spacing);
 	padding: 10px 16px;
 }
 
-.container__9497c {
+.container_uTMZTY {
 	@include dialog.container;
 }
 
-.controls_ab6641 {
+.controls_LSviKk {
 	// for the ONLY mana icon button there
 	--icon: icon("funnel");
 
 	gap: var(--spacing);
 
-	[role="button"]:not(.focusTarget__54e4b) {
+	[role="button"]:not(.focusTarget_EEwkB0) {
 		@include controls.icon-button;
 	}
 }
 
-.friendRequestsButton__523aa {
+.friendRequestsButton_QwUPp6 {
 	--icon: icon("person");
 }
 
-.header_ab6641 {
+.header_LSviKk {
 	@include dialog.header;
 
+	align-items: center;
 	display: flex;
 	flex-direction: row-reverse;
-	align-items: center;
 	justify-content: space-between;
 }
 
-.headerTabs_ab6641 {
+.headerTabs_LSviKk {
 	margin: 0;
 	width: 100%;
 
@@ -66,12 +67,12 @@
 	}
 }
 
-.icon__996b5 {
+.icon_8ZcKCk {
 	border-radius: 50%;
 }
 
-.chevron__996b5,
-.inboxIcon_ab6641,
-.inboxTitle_ab6641 {
+.chevron_8ZcKCk,
+.inboxIcon_LSviKk,
+.inboxTitle_LSviKk {
 	display: none;
 }

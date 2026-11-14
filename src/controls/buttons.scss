@@ -1,4 +1,5 @@
 @use "controls";
+@use "util";
 
 $destructive_button_color: color-mix(in srgb, currentColor 15%, transparent);
 $destructive_button_hover_color: color-mix(
@@ -25,28 +26,23 @@ $destructive_button_active_color: color-mix(
 	}
 }
 
-.button__201d5 {
+.button_9OQtot {
 	@include controls.button;
 
-	&:disabled {
-		opacity: var(--dim-level-opacity);
+	&:where(:disabled) {
+		@include controls.button-disabled;
 	}
 
-	&:where(.colorBrand__201d5) {
+	&:where(.colorBrand_9OQtot) {
 		@include controls.button-accent;
 	}
 
-	&:where(.colorRed__201d5) {
+	&:where(.colorRed_9OQtot) {
 		@include -destructive;
 	}
 
-	&:where(.colorGreen__201d5) {
+	&:where(.colorGreen_9OQtot) {
 		color: var(--success-color);
-	}
-
-	&:where(.lookBlank__201d5) {
-		background-color: transparent;
-		padding: 0;
 	}
 
 	& > div {
@@ -55,35 +51,39 @@ $destructive_button_active_color: color-mix(
 }
 
 // new
-.button_a22cb0 {
+.button_F7qvhY {
 	@include controls.button;
 
 	max-height: unset;
 
-	&:where(.primary_a22cb0) {
+	&:where(:disabled) {
+		@include controls.button-disabled;
+	}
+
+	&:where(.primary_F7qvhY) {
 		@include controls.button-accent;
 	}
 
-	&:where(.critical-primary_a22cb0),
-	&:where(.critical-secondary_a22cb0) {
+	&:where(.critical-primary_F7qvhY),
+	&:where(.critical-secondary_F7qvhY) {
 		@include -destructive;
 	}
 
-	&:where(.critical-primary_a22cb0, .critical-secondary_a22cb0) {
-		@include -destructive;
-	}
-
-	&:where(:not(.hasText_a22cb0)),
-	&:where(.icon-only_a22cb0) {
+	&:where(:not(.hasText_F7qvhY)),
+	&:where(.icon-only_F7qvhY) {
 		@include controls.icon-button;
+	}
+
+	&:where(.hasText_F7qvhY[aria-expanded]) {
+		&::after {
+			@include util.icon("pan-down");
+
+			content: "";
+			margin-inline-start: var(--spacing);
+		}
 	}
 }
 
-.buttonChildrenWrapper_a22cb0 {
+.buttonChildrenWrapper_F7qvhY {
 	all: unset;
-
-	// undo %caption
-	[data-text-variant] {
-		all: inherit;
-	}
 }

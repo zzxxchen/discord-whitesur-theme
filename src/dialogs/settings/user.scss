@@ -1,57 +1,73 @@
 @use "controls";
-@use "typography";
 
-$-themes-container-sel: ".stack_dbd263:has(> .themeSelectionContainer__36dee)";
+.themeSelection_IhyaN_ {
+	border-radius: 50%;
 
-// Nitro themes
+	&.defaultThemeSelection_IhyaN_ {
+		box-shadow: none;
+	}
+
+	&.selected_IhyaN_ {
+		box-shadow: 0 0 0 3px var(--accent-bg-color);
+	}
+}
+
+.themeSelectionContainer_IhyaN_ {
+	.selectionCircle_IhyaN_ {
+		display: none;
+	}
+}
+
+// Nitro themes as a vertical list of cards
+$-themes-container-sel: ".stack_TWWX0S:has(> .themeSelectionContainer_IhyaN_)";
+
 @include controls.radio(
 	$-themes-container-sel,
-	".themeSelection__36dee",
-	".themeSelection__36dee::before",
+	".themeSelection_IhyaN_",
+	".themeSelection_IhyaN_::before",
 	".hack"
 );
 
 #{$-themes-container-sel} {
 	background-color: transparent;
+	flex-direction: column;
 	gap: 0;
+	overflow: hidden;
 	padding: 0;
 
-	overflow: hidden;
-	flex-direction: column;
+	// radios.scss override
+	> .themeSelectionContainer_IhyaN_ {
+		height: unset;
+		width: 100%;
+	}
 
-	.iconWrapper__36dee {
+	.selectionCircle_IhyaN_,
+	:where([class*="iconWrapper"]) {
 		display: none;
 	}
 
-	.selectionCircle__36dee {
-		display: none;
-	}
-
-	.themeSelection__36dee {
-		// --card_fg_color
-		&.darkOverlay__36dee {
+	.themeSelection_IhyaN_ {
+		&[class*="darkOverlay"] {
 			color: #fff;
 		}
 
-		&.lightOverlay__36dee {
+		&[class*="lightOverlay"] {
 			color: rgba(0, 0, 6, 0.8);
 		}
 
-		// radios.scss override
 		&:first-of-type {
-			border-bottom: 1px solid var(--card_shade_color);
-			border-radius: 0;
-
-			display: flex;
 			align-items: center;
+			border-bottom: 1px solid var(--card-shade-color);
+			border-radius: 0;
+			display: flex;
 
-			.themeSelectionContainer__36dee:nth-last-child(2) > & {
+			.themeSelectionContainer_IhyaN_:nth-last-child(2) > & {
 				border: none;
 			}
 		}
 
 		// Custom theme
-		&.container__8fea4 {
+		&[class*="container__"] {
 			justify-content: start;
 
 			& > * {
@@ -64,8 +80,8 @@ $-themes-container-sel: ".stack_dbd263:has(> .themeSelectionContainer__36dee)";
 
 			box-sizing: border-box;
 			display: block;
-			width: 22px;
 			height: 22px;
+			width: 22px;
 		}
 
 		&[aria-checked="true"]::before {
@@ -80,18 +96,5 @@ $-themes-container-sel: ".stack_dbd263:has(> .themeSelectionContainer__36dee)";
 		&::after {
 			content: attr(aria-label);
 		}
-	}
-
-	.themeSelectionContainer__36dee {
-		width: 100%;
-		height: unset;
-	}
-
-	.themeTitleContainer__3e443 {
-		@extend %title-3;
-	}
-
-	.title__3e443 {
-		margin-bottom: 0;
 	}
 }

@@ -2,18 +2,17 @@
 @use "typography";
 
 %-center-text {
-	display: flex;
 	align-items: center;
+	display: flex;
 	justify-content: center;
 }
 
 %-tab-header {
-	color: var(--headerbar_fg_color);
-
-	position: fixed;
-	top: calc(var(--p) + 1px);
+	color: var(--headerbar-fg-color);
+	height: var(--headerbar-height);
+	inset-block-start: calc(var(--p) + 1px);
 	// prettier-ignore
-	left: calc(
+	inset-inline-start: calc(
 		var(--p)
 		+ var(--sidebar-width)
 		+ var(--scrollbar-width)
@@ -27,15 +26,15 @@
 		- var(--titlebar-button-size) - var(--titlebar-button-spacing) * 2
 		- var(--scrollbar-width)
 	);
-	height: var(--headerbar-height);
+	position: fixed;
 	z-index: 999;
-
-	app-region: drag;
+	-webkit-app-region: drag;
 
 	&::before {
+		background-color: var(--window-bg-color);
+		border-start-end-radius: var(--window_radius);
+		box-shadow: var(--elevation-low);
 		content: "";
-
-		position: absolute;
 		inset: 0;
 		// prettier-ignore
 		width: calc(
@@ -43,29 +42,24 @@
 			+ var(--titlebar-button-size) + var(--titlebar-button-spacing) * 2
 			- var(--weird-offset) - 2px
 		);
+		position: absolute;
 		z-index: -1;
-
-		background-color: var(--window_bg_color);
-		border-top-right-radius: var(--window_radius);
-		box-shadow: var(--elevation-low);
 	}
 }
 
-.closeButton_c2b141 {
+.closeButton_e76OBR {
 	@include controls.titlebar-button;
 
-	opacity: 1;
-	color: var(--headerbar_fg_color);
-
+	color: var(--headerbar-fg-color);
 	flex: 0 0 var(--titlebar-button-size);
+	opacity: 1;
 }
 
-.contentColumn__23e6b {
-	& > .defaultColor__4bd52:first-child,
-	.settingsPage_f131e9 > h3 {
+.contentColumn_jnk11m {
+	& > .defaultColor_MMUIw6:first-child {
 		@extend %-center-text;
 		@extend %-tab-header;
-		@extend %title-3;
+		@extend %heading;
 	}
 
 	& > div > .sectionTitle__7bffb {
@@ -73,7 +67,7 @@
 
 		& > * {
 			@extend %-center-text;
-			@extend %title-3;
+			@extend %heading;
 
 			margin: 0;
 		}
@@ -82,26 +76,26 @@
 
 // Server settings
 // #2 is for "Invites" tab
-.standardSidebarView__23e6b :where(.scrollerBase_d125d2, .scrollerBase__99f8c) {
+.standardSidebarView_jnk11m :where(.scrollerBase_tqapBM, .scrollerBase_JFqgFB) {
 	// Vencord
-	& > .contentColumn__23e6b > section > h2:first-child,
+	& > .contentColumn_jnk11m > section > h2:first-child,
 	.vcd-settings-title,
 	// Most tabs
 	div:not([class]) > h2[data-text-variant="heading-lg/semibold"],
 	// Boost Perks
 	#boost_perks-tab > main > h2,
 	// Emoji/Bans
-	:is(.emojiSettings_e7d73e, .container__4b8d8) .sectionTitle__7bffb > h2,
+	:is(.emojiSettings_XTvD56, .container_zS9TPG) .sectionTitle__7bffb > h2,
 	// Members
-	.header_fa2640 > h2,
+	.header_mg3aTC > h2,
 	// Roles
 	[aria-hidden="true"][style="height: 60px;"] + div > h2,
 	// Invites
-	.header__1de14,
+	.header_k0kUi1,
 	// Access
 	#access-tab > div > h2,
 	// Integrations
-	.breadcrumbs_befe67 > h2,
+	.breadcrumbs_DOXz-7 > h2,
 	// Server Boost Status
 	#guild_premium-tab > h2,
 	// Server Templates
@@ -110,25 +104,25 @@
 	.formTitle__5906b {
 		@extend %-center-text;
 		@extend %-tab-header;
-		@extend %title-3;
+		@extend %heading;
 	}
 
 	// "Invites" tab
-	.header__1de14 {
+	.header_k0kUi1 {
 		padding: 0;
 	}
 }
 
-.keybind_c2b141 {
+.keybind_e76OBR {
 	display: none;
 }
 
-.layer__960e4 {
-	opacity: 1;
+.layer_Fd0FEH {
 	background-color: transparent;
+	opacity: 1;
 }
 
-.layers__960e4 {
+.layers_Fd0FEH {
 	--p: calc((100% - var(--settings-dialog-size)) / 2);
 	--weird-offset: 1px;
 
@@ -136,92 +130,86 @@
 		--weird-offset: 2px;
 	}
 
-	.systemBar_c38106.show_c38106 + div &::before {
-		content: "";
-
-		position: fixed;
-		inset: 0;
-
-		background-color: var(--backdrop);
+	.systemBar_3zSH5d.show_3zSH5d + div &::before {
+		background-color: rgb(from var(--shade-color) r g b / calc(alpha * 2));
 		border-radius: var(--window_radius);
+		content: "";
+		inset: 0;
+		position: fixed;
 		z-index: 101;
 	}
 }
 
 // Server settings "Roles" tab sidebar
 // No idea how this got broken, 0 behavior change, GENIUS layout, D*scord
-.page__91dc3 {
+.page_cKeB2a {
 	position: absolute;
 
 	// Single role view headerbar
-	.titleContainer_e29cd7 {
+	.titleContainer_7NrAL2 {
 		@extend %-tab-header;
 
 		box-shadow: none;
 		gap: var(--spacing);
-		padding: var(--spacing);
-		margin: 0;
-
 		justify-content: start;
+		margin: 0;
+		padding: var(--spacing);
 
-		.addRole_e29cd7 {
+		.addRole_7NrAL2 {
 			@include controls.icon-button("plus");
 
-			app-region: no-drag;
+			-webkit-app-region: no-drag;
 		}
 
-		.title_e29cd7 {
+		.title_7NrAL2 {
 			@include controls.icon-button-with-tooltip(
 				$name: "left",
-				$direction: "top",
-				$selector: "&:hover > .titleText_e29cd7"
+				$direction: "block-start",
+				$selector: "&:hover > .titleText_7NrAL2"
 			);
 
-			app-region: no-drag;
+			-webkit-app-region: no-drag;
 		}
 	}
 }
 
-.sidebarRegion__23e6b {
+.sidebarRegion_jnk11m {
 	[role="tablist"][aria-orientation="vertical"]::before {
-		content: attr(aria-label);
-
-		position: fixed;
-		top: calc(var(--p) + 1px);
-		left: calc(var(--p) + var(--weird-offset));
-		width: calc(var(--sidebar-width) + var(--scrollbar-width));
-		height: var(--headerbar-height);
 		@extend %-center-text;
+		@extend %heading;
 
-		background-color: var(--sidebar_bg_color);
-		@extend %title-3;
-		color: var(--headerbar_fg_color);
-		border-right: 1px solid var(--sidebar_border_color);
-		border-top-left-radius: var(--window_radius);
+		background-color: var(--sidebar-bg-color);
+		border-inline-end: 1px solid var(--sidebar-border-color);
+		border-start-start-radius: var(--window_radius);
 		box-shadow: var(--elevation-low);
-
-		app-region: drag;
+		color: var(--headerbar-fg-color);
+		content: attr(aria-label);
+		height: var(--headerbar-height);
+		inset-block-start: calc(var(--p) + 1px);
+		inset-inline-start: calc(var(--p) + var(--weird-offset));
+		position: fixed;
+		-webkit-app-region: drag;
+		width: calc(var(--sidebar-width) + var(--scrollbar-width));
 	}
 }
 
-.standardSidebarView__23e6b {
-	box-shadow: var(--elevation-high);
-	border: 1px solid var(--window_outline_color);
+.standardSidebarView_jnk11m {
+	border: 1px solid var(--window-outline-color);
 	border-radius: var(--window_radius);
-	padding-top: var(--headerbar-height);
-
-	overflow: hidden;
-	position: fixed;
+	box-shadow: var(--elevation-high);
 	inset: var(--p);
-}
-
-.tools__23e6b {
+	overflow: hidden;
+	padding-block-start: var(--headerbar-height);
 	position: fixed;
-	top: calc(var(--p) + var(--titlebar-button-spacing));
-	right: calc(var(--p) + var(--titlebar-button-spacing));
 }
 
-.toolsContainer__23e6b {
+.tools_jnk11m {
+	inset-block-start: calc(var(--p) + var(--titlebar-button-spacing));
+	inset-inline-end: calc(var(--p) + var(--titlebar-button-spacing));
+	position: fixed;
+}
+
+.toolsContainer_jnk11m {
 	position: absolute;
 	z-index: 999;
 }

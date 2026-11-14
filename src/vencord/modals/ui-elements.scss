@@ -1,21 +1,10 @@
 @use "controls";
-@use "typography";
 
 .vc-plugin-ui-elements-modal-content {
-	text-align: start;
 	gap: 34px;
-
-	* {
-		box-sizing: border-box;
-	}
-
-	.vc-text-xl {
-		@extend %title-3;
-	}
+	text-align: start;
 
 	section > .vc-text-sm {
-		@extend %caption;
-
 		margin-block: var(--spacing) 16px;
 	}
 }
@@ -28,8 +17,7 @@
 
 .vc-plugin-ui-elements-switches-row {
 	@include controls.card-in-container(
-		$first-selector: ":first-child",
-		$last-selector: ":last-child"
+		$first-selector: "&:first-child",
+		$last-selector: "&:last-child"
 	);
-	@extend %title-3;
 }

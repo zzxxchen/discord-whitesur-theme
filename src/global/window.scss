@@ -1,4 +1,6 @@
-@use "controls";
+:where(*) {
+	box-sizing: border-box;
+}
 
 .custom-theme-background {
 	body {
@@ -7,8 +9,8 @@
 
 	#app-mount {
 		inset: var(--app-border-size);
-		width: calc(100% - var(--app-border-size) * 2);
 		height: calc(100% - var(--app-border-size) * 2);
+		width: calc(100% - var(--app-border-size) * 2);
 	}
 }
 
@@ -17,68 +19,68 @@
 		border-radius: var(--window_radius);
 
 		&::before {
-			content: "";
-
-			position: absolute;
-			inset: var(--app-border-size);
-			z-index: 9999;
-
-			pointer-events: none;
-
-			outline: var(--app-border-size) solid var(--window_outline_color);
 			border-radius: var(--window_radius);
+			content: "";
+			inset: var(--app-border-size);
+			outline: var(--app-border-size) solid var(--window-outline-color);
+			pointer-events: none;
+			position: absolute;
+			z-index: 9999;
 		}
 	}
 
-	.bar_c38106 {
-		right: 16px;
+	.bar_3zSH5d {
+		inset-inline-end: 16px;
 	}
 
-	.base__5e434 {
+	.base_pog62O {
 		padding: 0;
 	}
 }
 
 #app-mount {
 	// wtf discord
-	color: var(--window_fg_color);
+	color: var(--window-fg-color);
 }
 
-.bar_c38106 {
+.backForwardButtons_nS9Yqn {
+	display: none;
+}
+
+.bar_3zSH5d {
 	background: none;
-	color: var(--headerbar_fg_color);
-	padding: 0;
-
-	position: fixed;
-	top: var(--spacing);
-	right: 16px;
-	z-index: 101;
+	color: var(--headerbar-fg-color);
+	gap: 0; // even spacing between trailing section and winButtons
 	height: unset;
-	gap: 0 !important; // even spacing between trailing section and winButtons
+	inset-block-start: var(--spacing);
+	inset-inline-end: 16px;
+	padding: 0;
+	position: fixed;
+	z-index: 101;
 
-	&.systemBar_c38106 {
+	&.systemBar_3zSH5d {
 		display: none;
 	}
 
 	// Visible app banner
 	&:nth-last-child(3) {
-		margin-top: calc(var(--icon-button-size) + var(--spacing-2x));
+		margin-block-start: calc(var(--icon-button-size) + var(--spacing-2x));
 	}
 }
 
 // An invisible element that increases the parent's width, amazing
-.leading_c38106 {
+.leading_3zSH5d {
 	& > div > span {
 		display: none;
 	}
 }
 
-.title_c38106 {
+.title_3zSH5d {
 	display: none;
 }
 
-.trailing_c38106 {
-	gap: 10px !important;
+.trailing_3zSH5d {
+	gap: 10px;
 
 	[aria-label="Update Ready!"],
 	[href="https://support.discord.com"]
@@ -90,7 +92,7 @@
 // ============ Titlebar buttons - WhiteSur traffic lights ============
 
 // Base button style
-.winButton_c38106 {
+.winButton_3zSH5d {
 	width: 16px;
 	height: 16px;
 	padding: 0;
@@ -113,13 +115,13 @@
 	}
 }
 
-.winButtons_c38106 {
+.winButtons_3zSH5d {
 	gap: 10px;
 	width: 68px;
 	padding: 0;
 }
 
-.winButtonsWithDivider_c38106 {
+.winButtonsWithDivider_3zSH5d {
 	padding: 0;
 
 	&::before {
@@ -128,8 +130,8 @@
 }
 
 // Close button - red traffic light
-.winButtonClose_c38106 {
-	@extend .winButton_c38106;
+.winButtonClose_3zSH5d {
+	@extend .winButton_3zSH5d;
 	display: var(--titlebar-close-button);
 	background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1jbG9zZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI5MywyNDIuNjQpIj4KICA8cmVjdCB4PSIyOTMiIHk9Ii0yNDIuNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjk0LC0yNDEuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2NiNGU0MyIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNmZTYyNTQiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KPC9zdmc+Cg==");
 
@@ -143,8 +145,8 @@
 }
 
 // Maximize button - green traffic light
-.winButtonMinMax_c38106 {
-	@extend .winButton_c38106;
+.winButtonMinMax_3zSH5d {
+	@extend .winButton_3zSH5d;
 	display: var(--titlebar-maximize-button);
 	background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1tYXhpbWl6ZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI3MywyNDIuNjQpIj4KICA8cmVjdCB4PSIyNzMiIHk9Ii0yNDIuNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjc0LC0yNDEuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iIzIwYTkzMiIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiMyOGQzM2YiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KPC9zdmc+Cg==");
 
@@ -172,7 +174,7 @@
 }
 
 // Maximize button - restore icon when window is maximized
-.winButtonMinMax_c38106[aria-label*="Restore"] {
+.winButtonMinMax_3zSH5d[aria-label*="Restore"] {
 	&:hover {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIHRyYW5zZm9ybT0ibWF0cml4KDMuNzc5NSAwIDAgMy43Nzk1IC0zNDIgLTQ2Ny41MykiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgPHBhdGggZD0ibTkyLjYwNSAxMjcuNjdjMS4wMjI5IDAgMS44NTIxLTAuODI5MTkgMS44NTIxLTEuODUyMSAwLTEuMDIyOS0wLjgyOTItMS44NTIxLTEuODUyMS0xLjg1MjFzLTEuODUyMSAwLjgyOTItMS44NTIxIDEuODUyMSAwLjgyOTIgMS44NTIxIDEuODUyMSAxLjg1MjEiIGZpbGw9IiMyMGE5MzIiIHN0cm9rZS13aWR0aD0iLjc3Nzc4Ii8+CiAgPHBhdGggZD0ibTkyLjYwNSAxMjcuNTRjMC45NDk3OCAwIDEuNzE5OC0wLjc3MDA2IDEuNzE5OC0xLjcxOTggMC0wLjk0OTg2LTAuNzY5OTktMS43MTk4LTEuNzE5OC0xLjcxOTgtMC45NDk4NSAwLTEuNzE5OCAwLjc2OTk5LTEuNzE5OCAxLjcxOTggMCAwLjk0OTc4IDAuNzY5OTkgMS43MTk4IDEuNzE5OCAxLjcxOTgiIGZpbGw9IiMyOGQzM2YiIHN0cm9rZS13aWR0aD0iLjc2NDcxIi8+CiA8L2c+CiA8cGF0aCBkPSJtOC4wMjU0IDMuNDE0MXYzLjU4NTljMCAwLjQxNTUyIDAuNTg0NDggMSAxIDFoMy41ODU5em0tNC42MzY3IDQuNTg1OSA0LjU4NTkgNC41ODU5di0zLjU4NTljMC0wLjQxNTUyLTAuNTg0NDgtMS0xLTF6IiBvcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSIzLjc3OTUiLz4KPC9zdmc+Cg==");
 	}
@@ -184,25 +186,25 @@
 
 // Non-focused state - all buttons become grayscale
 :root:not(.app-focused) {
-	.winButtonClose_c38106 {
+	.winButtonClose_3zSH5d {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2JhYmFiYSIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNjZWNlY2UiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KPC9zdmc+Cg==");
 	}
 
-	.winButtonMinMax_c38106,
-	.winButtonMinMax_c38106:first-child {
+	.winButtonMinMax_3zSH5d,
+	.winButtonMinMax_3zSH5d:first-child {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2JhYmFiYSIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNjZWNlY2UiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KPC9zdmc+Cg==");
 	}
 
 	// Non-focused hover - show icon on gray circle
-	.winButtonClose_c38106:hover {
+	.winButtonClose_3zSH5d:hover {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2JhYmFiYSIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNjZWNlY2UiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KIDxwYXRoIGQ9Im01LjE2ODYgNS4wOTEzYy0wLjM5MTc1IDAuMzkxNzEtMC4zOTE3NSAxLjAyMjQgMCAxLjQxNDJsMS40MTQyIDEuNDE0Mi0xLjQxNDIgMS40MTQyYy0wLjM5MTc1IDAuMzkxNzgtMC4zOTE3NSAxLjAyMjUgMCAxLjQxNDIgMC4zOTE3MSAwLjM5MTgyIDEuMDIyNSAwLjM5MTgyIDEuNDE0MiAwbDEuNDE0Mi0xLjQxNDIgMS40MTQyIDEuNDE0MmMwLjM5MTcxIDAuMzkxODIgMS4wMjI1IDAuMzkxODIgMS40MTQyIDAgMC4zOTE3NC0wLjM5MTY3IDAuMzkxNzQtMS4wMjI0IDAtMS40MTQybC0xLjQxNDItMS40MTQyIDEuNDE0Mi0xLjQxNDJjMC4zOTE3NC0wLjM5MTc4IDAuMzkxNzQtMS4wMjI1IDAtMS40MTQyLTAuMzkxNzEtMC4zOTE4Mi0xLjAyMjUtMC4zOTE4Mi0xLjQxNDIgMGwtMS40MTQyIDEuNDE0Mi0xLjQxNDItMS40MTQyYy0wLjM5MTcxLTAuMzkxODItMS4wMjI1LTAuMzkxODItMS40MTQyIDB6IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IiBvcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSIzLjc3OTUiLz4KPC9zdmc+Cg==");
 	}
 
-	.winButtonMinMax_c38106:hover {
+	.winButtonMinMax_3zSH5d:hover {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2JhYmFiYSIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNjZWNlY2UiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KIDxwYXRoIGQ9Im02LjQxMjkgNC45OTUyIDQuNTg2IDQuNTg2MnYtMy41ODZjMC0wLjQxNTUzLTAuNTg0NS0xLTEtMXptLTEuNDE0IDEuNDE0MXYzLjU4NmMwIDAuNDE1NTMgMC41ODQ0NiAxIDAuOTk5OTggMWgzLjU4NTl6IiBvcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSIzLjc3OTYiLz4KPC9zdmc+Cg==");
 	}
 
-	.winButtonMinMax_c38106:first-child:hover {
+	.winButtonMinMax_3zSH5d:first-child:hover {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iI2JhYmFiYSIvPgogICAgPHBhdGggZD0ibTEyIDEwNDYuOWMzLjU4OTggMCA2LjQ5OTktMi45MTAzIDYuNDk5OS02LjUwMDEgMC0zLjU4OTktMi45MTAyLTYuNS02LjQ5OTktNi41LTMuNTg5OSAwLTYuNTAwMSAyLjkxMDEtNi41MDAxIDYuNSAwIDMuNTg5OCAyLjkxMDIgNi41MDAxIDYuNTAwMSA2LjUwMDEiIGZpbGw9IiNjZWNlY2UiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KIDxyZWN0IHg9IjMuOTk4MyIgeT0iNi45OTIyIiB3aWR0aD0iOC4wMDAxIiBoZWlnaHQ9IjIiIHJ5PSIuOTk5OTgiIG9wYWNpdHk9Ii41IiBzdHJva2Utd2lkdGg9IjMuNzc5NSIvPgo8L3N2Zz4K");
 	}
 }

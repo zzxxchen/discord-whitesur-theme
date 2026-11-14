@@ -1,0 +1,18 @@
+@use "util";
+
+.container_VhFsFg {
+	align-items: center;
+	column-gap: var(--spacing-2x);
+}
+
+.description_VhFsFg {
+	margin-block: 2px -2px;
+}
+
+.label_VhFsFg {
+	@extend %text-normal;
+}
+
+.labelContainer_VhFsFg {
+	gap: 0;
+}

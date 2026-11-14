@@ -1,7 +1,7 @@
 @use "controls";
 @use "typography";
 
-.closeCircleButton_cf6da1 {
+.closeCircleButton_sLUoDH {
 	--icon: icon("window-close");
 
 	@include controls.titlebar-button;
@@ -10,31 +10,29 @@
 	order: 1;
 }
 
-.editorFooter_cf6da1 {
+.editorFooter_sLUoDH {
 	display: none;
 }
 
-.editorHeader_cf6da1 {
-	box-shadow: var(--elevation-low);
-	padding-inline: 0 var(--titlebar-button-spacing);
-
-	display: flex;
+.editorHeader_sLUoDH {
 	align-items: center;
-	justify-content: center;
+	box-shadow: var(--elevation-low);
+	display: flex;
 	flex: 1 0 auto;
-	width: unset;
+	justify-content: center;
 	height: var(--headerbar-height);
+	padding-inline: 0 var(--titlebar-button-spacing);
+	width: unset;
 
 	h3 {
-		@extend %title-3;
+		@extend %heading;
 
 		margin: auto;
 	}
 }
 
-.themeEditor_cf6da1 {
-	border-left: 1px solid var(--secondary_sidebar_border_color);
+.themeEditor_sLUoDH {
+	border-inline-start: 1px solid var(--secondary-sidebar-border-color);
 	padding: 0;
-
 	z-index: 999;
 }

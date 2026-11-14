@@ -2,15 +2,15 @@
 @use "util";
 
 // Emoji
-.popoutContainer__0f481 {
+.popoutContainer_j9Vvzj {
 	--custom-message-helpers-popout-padding-width: 0px;
 
 	@include controls.tooltip;
 
 	// "Invite-only server"
-	[data-text-variant="text-xs/normal"],
+	[data-text-variant="body-xs/medium"],
 	// "This emoji is from"
-	.defaultColor__4bd52,
+	.defaultColor_MMUIw6,
 	.guildTitle__0f481 {
 		color: inherit;
 	}
@@ -30,25 +30,23 @@
 	}
 }
 
-.reactionTooltip_bbcccb {
+.reactionTooltip_5l5ajC {
 	@include controls.tooltip;
 
-	.reactionTooltipText_bbcccb {
+	.reactionTooltipText_5l5ajC {
 		color: inherit;
 		font: inherit;
 	}
 }
 
-.tooltip__4e35b {
+.tooltip_ZDdyhE {
 	@include controls.tooltip;
 
 	* {
 		@extend %text-normal;
-
-		color: inherit;
 	}
 
-	.caret__5bc6a {
+	.caret_q722L8 {
 		display: none;
 	}
 }
