@@ -209,8 +209,11 @@
 	}
 }
 
-// Dark theme non-focused state - use dark gray traffic lights
-:root.theme-dark:not(.app-focused) {
+// Dark theme non-focused state - use dark gray traffic lights.
+// theme-dark may sit on <html> or on a descendant; app-focused is on :root.
+:root.theme-dark:not(.app-focused),
+:root:not(.app-focused) .theme-dark,
+body.theme-dark:not(.app-focused) {
 	.winButtonClose_3zSH5d {
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnIGlkPSJ0aXRsZWJ1dHRvbi1taW5pbWl6ZS1iYWNrZHJvcCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1MyAyNjguNjQpIj4KICA8cmVjdCB4PSIyNTMiIHk9Ii0yNjguNjQiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcnk9IjEuNjkzMWUtNSIgb3BhY2l0eT0iMCIgc3Ryb2tlLXdpZHRoPSIuNDc0MzIiIHN0eWxlPSJwYWludC1vcmRlcjptYXJrZXJzIHN0cm9rZSBmaWxsIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU0LC0yNjcuNjQpIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3Ij4KICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUsLTEwMzMuNCkiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICA8cGF0aCBkPSJtMTIgMTA0Ny40YzMuODY1OSAwIDYuOTk5OS0zLjEzNCA2Ljk5OTktN3MtMy4xMzQtNy02Ljk5OTktN2MtMy44NjYgMC03LjAwMDEgMy4xMzQtNy4wMDAxIDdzMy4xMzQgNyA3LjAwMDEgNyIgZmlsbD0iIzVkNWQ1ZCIvPgogICA8L2c+CiAgPC9nPgogPC9nPgo8L3N2Zz4K");
 	}
